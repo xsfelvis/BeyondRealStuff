@@ -1,9 +1,11 @@
-package com.xsf.realstuff;
+package com.xsf.realstuff.launcher.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.xsf.moduleframework.base.BaseActivity;
+import com.xsf.realstuff.R;
+
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
