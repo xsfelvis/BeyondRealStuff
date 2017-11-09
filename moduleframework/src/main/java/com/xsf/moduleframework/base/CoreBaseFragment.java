@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  * Description:
  */
 
-public class BaseFragment extends Fragment {
+public class CoreBaseFragment extends Fragment {
     //    private PublishSubject<FragmentLifecycleEvent> fragmentLifecycleSubject = PublishSubject.create();
 
     @Override

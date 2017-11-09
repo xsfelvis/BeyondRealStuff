@@ -10,12 +10,12 @@ import io.reactivex.disposables.CompositeDisposable;
  * Description: 所有Presenter必须实现此接口
  */
 
-public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
+public class CoreBasePresenter<V extends CoreMvpView> implements CoreMvpPresenter<V> {
     private final IDataManger mDataManager;
     private final CompositeDisposable mCompositeDisposable;
     private V mvpView;
 
-    public BasePresenter(IDataManger dataManger, CompositeDisposable compositeDisposable) {
+    public CoreBasePresenter(IDataManger dataManger, CompositeDisposable compositeDisposable) {
         this.mDataManager = dataManger;
         this.mCompositeDisposable = compositeDisposable;
     }

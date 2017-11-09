@@ -1,4 +1,4 @@
-package com.xsf.moduleframework.base;
+package com.xsf.realstuff.launcher.ui.base;
 
 /**
  * Author: xushangfei
@@ -7,6 +7,5 @@ package com.xsf.moduleframework.base;
  */
 
 public interface MvpView {
-    //void setPresenter(T presenter);
     void showError();
 }

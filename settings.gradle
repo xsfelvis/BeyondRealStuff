@@ -1,1 +1,1 @@
-include ':app', ':moduleframework', ':moudlerealstuff'
+include ':app'

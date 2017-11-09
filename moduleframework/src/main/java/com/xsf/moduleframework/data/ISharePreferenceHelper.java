@@ -7,4 +7,12 @@ package com.xsf.moduleframework.data;
  */
 
 public interface ISharePreferenceHelper {
+    /**
+     * 夜间 or 白天模式
+     * @param isNight
+     */
+    void setTheme(boolean isNight);
+
+    boolean getTheme();
+
 }

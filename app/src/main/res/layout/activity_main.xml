@@ -15,13 +15,13 @@
         app:title="干货"
         app:titleTextColor="@android:color/white" />
 
-    <com.xsf.moduleframework.widget.NoTouchViewPager
+    <com.xsf.realstuff.launcher.ui.widget.NoTouchViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-    </com.xsf.moduleframework.widget.NoTouchViewPager>
+    </com.xsf.realstuff.launcher.ui.widget.NoTouchViewPager>
 
     <FrameLayout
         android:id="@+id/container"
@@ -32,9 +32,8 @@
     <me.majiajie.pagerbottomtabstrip.PageBottomTabLayout
         android:id="@+id/tab"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="42dp"
         android:background="?attr/bottomcolor"
-        android:elevation="8dp" />
+        android:elevation="4dp" />
 </LinearLayout>
 

@@ -6,8 +6,7 @@ package com.xsf.moduleframework.base;
  * Description:
  */
 
-public interface MvpPresenter<V extends MvpView> {
-    void attachView(V view);
-
-    void onDetch();
+public interface CoreMvpView {
+    //void setPresenter(T presenter);
+    void showError();
 }

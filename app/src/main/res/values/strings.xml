@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">realstuff</string>
+    <string name="app_name">秋点兵</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title1">首页</string>
+    <string name="title2">android</string>
+    <string name="title3">ios</string>
+    <string name="title4">前端</string>
+
+    <string name="main2">福利</string>
+    <string name="main3">收藏</string>
+
+
+    <string name="translateName">translate_search</string>
+    <string name="search">搜索</string>
+    <string name="translate_mz">translate_mz</string>
 </resources>
