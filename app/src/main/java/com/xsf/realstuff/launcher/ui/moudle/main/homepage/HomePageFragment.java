@@ -25,7 +25,7 @@ import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IHomePagePresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.HomePagePresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.HomePageAdapter;
-import com.xsf.realstuff.launcher.ui.base.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.ui.moudle.main.homepage.view.IHomePageView;
 import com.xsf.realstuff.launcher.util.LogUtils;
 import com.xsf.realstuff.launcher.util.RecyclerViewUtil;

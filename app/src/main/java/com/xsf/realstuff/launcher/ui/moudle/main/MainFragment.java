@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
 import com.xsf.realstuff.launcher.data.IDataManger;
-import com.xsf.realstuff.launcher.ui.base.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.ui.moudle.main.homepage.HomePageFragment;
 
 import java.util.ArrayList;

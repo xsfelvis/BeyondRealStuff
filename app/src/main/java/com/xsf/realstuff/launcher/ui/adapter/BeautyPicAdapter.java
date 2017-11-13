@@ -17,10 +17,10 @@ import java.util.List;
  * Created by Administrator on 2017/4/24 0024.
  */
 
-public class MzAdapter extends CommonSimpleAdapter<Result> {
+public class BeautyPicAdapter extends CommonSimpleAdapter<Result> {
 
 
-    public MzAdapter(Context context, int layoutId, List<Result> datas) {
+    public BeautyPicAdapter(Context context, int layoutId, List<Result> datas) {
         super(context, layoutId, datas);
     }
     @Override

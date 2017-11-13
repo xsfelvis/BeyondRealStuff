@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.base;
+package com.xsf.realstuff.launcher.common.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.util.TypedValue;
 
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
-import com.xsf.realstuff.launcher.ui.moudle.GirlsFragment;
+import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
 import com.xsf.realstuff.launcher.ui.moudle.SettingFragment;
 import com.xsf.realstuff.launcher.util.RxBus;
 
@@ -70,7 +70,7 @@ public abstract class BaseFragment extends Fragment {
                 fragment = MainFragment.newInstance();
                 break;
             case 1:
-                fragment = GirlsFragment.newInstance();
+                fragment = BeautyPicFragment.newInstance();
                 break;
             case 2:
                 fragment = SettingFragment.newInstance();

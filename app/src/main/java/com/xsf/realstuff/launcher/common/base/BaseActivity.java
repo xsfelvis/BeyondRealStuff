@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.base;
+package com.xsf.realstuff.launcher.common.base;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

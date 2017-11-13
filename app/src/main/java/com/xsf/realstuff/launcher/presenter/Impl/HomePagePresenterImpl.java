@@ -4,7 +4,7 @@ import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.data.network.response.ThemeResponse;
 import com.xsf.realstuff.launcher.presenter.IHomePagePresenter;
-import com.xsf.realstuff.launcher.ui.base.BasePresenter;
+import com.xsf.realstuff.launcher.common.base.BasePresenter;
 import com.xsf.realstuff.launcher.ui.moudle.main.homepage.view.IHomePageView;
 import com.xsf.realstuff.launcher.util.LogUtils;
 
@@ -48,7 +48,7 @@ public class HomePagePresenterImpl<V extends IHomePageView> extends BasePresente
     public void loadData(String path) {
         LogUtils.d(TAG, getMvpView());
         final List<Result> list = new ArrayList<>();
-        getmCompositeDisposable().add(getmDataManger().getThemeDataCall(path)
+        getmCompositeDisposable().add(getDataManger().getThemeDataCall(path)
                 //将返回值转换为多个Observable<Result>
                 .concatMap(new Function<ThemeResponse, ObservableSource<Result>>() {
                     @Override

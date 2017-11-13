@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.base;
+package com.xsf.realstuff.launcher.common.base;
 
 import com.xsf.realstuff.launcher.data.IDataManger;
 
@@ -29,11 +29,11 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
     }
 
     @Override
-    public void onDetch() {
+    public void onDetchView() {
         mCompositeDisposable.dispose();
     }
 
-    public IDataManger getmDataManger() {
+    public IDataManger getDataManger() {
         return mDataManger;
     }
 

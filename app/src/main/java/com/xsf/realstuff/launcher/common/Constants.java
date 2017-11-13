@@ -14,6 +14,7 @@ public class Constants {
         public static final int HTTP_READ_TIMEOUT = 20 * 1000;
     }
 
+
     public static final String baseUrl = "http://gank.io/api/";
 
     public static final int PAGECOUNT = 20;
