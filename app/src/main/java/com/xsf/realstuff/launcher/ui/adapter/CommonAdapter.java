@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.util.TimeUtils;
+import com.xsf.realstuff.launcher.util.image.ImageLoaderManager;
 
 import java.util.List;
 
@@ -70,8 +70,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.ViewHolder
         }else{
             if (result.getImages() != null && result.getImages().size() > 0) {
                 holder.image.setVisibility(View.VISIBLE);
-                Glide.with(holder.itemView.getContext()).load(result.getImages().get(0))
-                        .asBitmap().centerCrop().into(holder.image);
+                ImageLoaderManager.getImageLoader().displayImage(holder.itemView.getContext(),result.getImages().get(0),holder.image);
             }
         }
 

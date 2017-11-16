@@ -37,7 +37,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         return mDataManger;
     }
 
-    public CompositeDisposable getmCompositeDisposable() {
+    public CompositeDisposable getCompositeDisposable() {
         return mCompositeDisposable;
     }
 

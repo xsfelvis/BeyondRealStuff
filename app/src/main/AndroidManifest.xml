@@ -23,8 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".launcher.ui.moudle.picdetail.PicDetailActivity">
-        </activity>
+        <activity android:name=".launcher.ui.moudle.picdetail.PicDetailActivity"/>
+        <activity
+            android:name=".launcher.ui.moudle.main.order.OrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".launcher.ui.moudle.detail.DetailActivity"/>
+
     </application>
 
 </manifest>

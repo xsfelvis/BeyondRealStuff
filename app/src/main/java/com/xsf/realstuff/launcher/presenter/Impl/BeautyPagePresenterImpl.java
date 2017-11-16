@@ -29,7 +29,7 @@ public class BeautyPagePresenterImpl<V extends IBeautyView> extends BasePresente
 
     @Override
     public void loadData(String path) {
-        getmCompositeDisposable().add(
+        getCompositeDisposable().add(
                 getDataManger().getThemeDataCall(path)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

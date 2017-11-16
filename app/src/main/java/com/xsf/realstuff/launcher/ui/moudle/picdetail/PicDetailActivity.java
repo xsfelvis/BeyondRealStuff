@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.common.base.BaseActivity;
+import com.xsf.realstuff.launcher.util.image.ImageLoaderManager;
 
 import butterknife.BindView;
 
@@ -29,7 +28,8 @@ public class PicDetailActivity extends BaseActivity {
                 PicDetailActivity.super.onBackPressed();
             }
         });
-        Glide.with(this).load(getIntent().getStringExtra("img_url")).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade().into(photoView);
+        ImageLoaderManager.getImageLoader().displayImage(this,getIntent().getStringExtra("img_url"),photoView);
+        //Glide.with(this).load(getIntent().getStringExtra("img_url")).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade().into(photoView);
     }
 
     @Override

@@ -35,49 +35,49 @@
             android:textColor="@color/settingtextcolor"
             android:textSize="14sp"/>
     </LinearLayout>
+    <!--
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="50dp"
+            android:background="?attr/bottomline"></View>
 
-    <View
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="50dp"
-        android:background="?attr/bottomline"></View>
+       <LinearLayout
+            android:id="@+id/ll_collection"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
 
-    <LinearLayout
-        android:id="@+id/ll_collection"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="16dp"
+                app:srcCompat="@drawable/ic_collections_black_24dp"
+                />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="16dp"
-            app:srcCompat="@drawable/ic_collections_black_24dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_collection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="我的收藏"
-            android:textColor="@color/settingtextcolor"
-            android:textSize="14sp"
-            />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_collection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="我的收藏"
+                android:textColor="@color/settingtextcolor"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
 
     <View
         android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="50dp"
-        android:background="?attr/bottomline"></View>
+        android:background="?attr/bottomline"></View>-->
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:foreground="?android:attr/selectableItemBackground"
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             app:theme="@style/Color1SwitchStyle"/>
-    </LinearLayout>
+    </LinearLayout>-->
 
 
     <View

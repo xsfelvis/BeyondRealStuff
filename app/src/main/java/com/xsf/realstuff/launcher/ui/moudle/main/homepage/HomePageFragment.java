@@ -1,6 +1,7 @@
 package com.xsf.realstuff.launcher.ui.moudle.main.homepage;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,12 +22,14 @@ import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
 import com.xsf.realstuff.launcher.common.Constants;
+import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IHomePagePresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.HomePagePresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.HomePageAdapter;
-import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.ui.moudle.detail.DetailActivity;
 import com.xsf.realstuff.launcher.ui.moudle.main.homepage.view.IHomePageView;
+import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
 import com.xsf.realstuff.launcher.util.LogUtils;
 import com.xsf.realstuff.launcher.util.RecyclerViewUtil;
 
@@ -130,16 +133,16 @@ public class HomePageFragment extends AbstractLazyFragment implements IHomePageV
             @Override
             public void OnItemClick(View v, int position) {
                 mPosition = position;
-                /*Intent intent = new Intent(getActivity(), DetailActivity.class);
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("bean", mList.get(position));
-                startActivity(intent);*/
+                startActivity(intent);
             }
 
             @Override
             public void OnImageViewClick(View v, int position) {
-                /*Intent intent = new Intent(getActivity(), ImageDetailActivity.class);
+                Intent intent = new Intent(getActivity(), PicDetailActivity.class);
                 intent.putExtra("imgUrl", mList.get(position).getImages().get(0));
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
 

@@ -34,8 +34,8 @@ public class HomePagePresenterImpl<V extends IHomePageView> extends BasePresente
     public static final String TAG = "HomePagePresenterImpl";
 
 
-    public HomePagePresenterImpl(IDataManger mDataManger, CompositeDisposable mCompositeDisposable) {
-        super(mDataManger, mCompositeDisposable);
+    public HomePagePresenterImpl(IDataManger dataManger, CompositeDisposable compositeDisposable) {
+        super(dataManger, compositeDisposable);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class HomePagePresenterImpl<V extends IHomePageView> extends BasePresente
     public void loadData(String path) {
         LogUtils.d(TAG, getMvpView());
         final List<Result> list = new ArrayList<>();
-        getmCompositeDisposable().add(getDataManger().getThemeDataCall(path)
+        getCompositeDisposable().add(getDataManger().getThemeDataCall(path)
                 //将返回值转换为多个Observable<Result>
                 .concatMap(new Function<ThemeResponse, ObservableSource<Result>>() {
                     @Override

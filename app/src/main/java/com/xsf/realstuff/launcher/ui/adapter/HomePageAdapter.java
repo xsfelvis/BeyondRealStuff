@@ -9,12 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.haozhang.lib.SlantedTextView;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.util.DensityUtil;
+import com.xsf.realstuff.launcher.util.image.ImageLoaderManager;
 
 import java.util.List;
 
@@ -45,13 +44,9 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
         if (mList.get(position).getImages() != null && mList.get(position).getImages().size() > 0) {
             recyclerViewHolder.ivIndex.setVisibility(View.VISIBLE);
 
-            Glide.with(recyclerViewHolder.itemView.getContext())
-                    .load(mList.get(position).getImages().get(0) + "?imageView2/0/w/"
-                            + DensityUtil.getScreenWidth(recyclerViewHolder.itemView.getContext()) + "/"
-                            + "h/" + DensityUtil.dip2px(recyclerViewHolder.itemView.getContext(), 200))
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .crossFade()
-                    .into(recyclerViewHolder.ivIndex);
+            ImageLoaderManager.getImageLoader().displayImage(recyclerViewHolder.itemView.getContext(),mList.get(position).getImages().get(0) + "?imageView2/0/w/"
+                    + DensityUtil.getScreenWidth(recyclerViewHolder.itemView.getContext()) + "/"
+                    + "h/" + DensityUtil.dip2px(recyclerViewHolder.itemView.getContext(),200),recyclerViewHolder.ivIndex);
 
         } else {
             recyclerViewHolder.ivIndex.setVisibility(View.GONE);

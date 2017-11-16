@@ -10,7 +10,7 @@ import android.util.TypedValue;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
 import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
-import com.xsf.realstuff.launcher.ui.moudle.SettingFragment;
+import com.xsf.realstuff.launcher.ui.moudle.setting.SettingFragment;
 import com.xsf.realstuff.launcher.util.RxBus;
 
 import io.reactivex.Observable;
