@@ -17,17 +17,17 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
 import com.xsf.realstuff.launcher.common.Constants;
-import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
-import com.xsf.realstuff.launcher.common.base.BaseFragment;
+import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.BaseFragment;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.ICommonMvpPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.CommonPresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.CommonAdapter;
 import com.xsf.realstuff.launcher.ui.moudle.detail.DetailActivity;
 import com.xsf.realstuff.launcher.ui.moudle.main.theme.view.ICommonView;
-import com.xsf.realstuff.launcher.util.ItemDecoration;
-import com.xsf.realstuff.launcher.util.LogUtils;
-import com.xsf.realstuff.launcher.util.RecyclerViewUtil;
+import com.xsf.framework.util.ItemDecoration;
+import com.xsf.framework.util.LogUtils;
+import com.xsf.framework.util.RecyclerViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 
-import static com.xsf.realstuff.launcher.util.RecyclerViewUtil.invalidateCacheItem;
+import static com.xsf.framework.util.RecyclerViewUtil.invalidateCacheItem;
 
 
 /**

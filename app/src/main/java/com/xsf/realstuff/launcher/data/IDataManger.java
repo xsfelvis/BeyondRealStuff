@@ -1,8 +1,8 @@
 package com.xsf.realstuff.launcher.data;
 
-import com.xsf.realstuff.launcher.data.database.IDbHelper;
+import com.xsf.framework.base.data.IDbHelper;
+import com.xsf.framework.base.data.ISharePreferenceHelper;
 import com.xsf.realstuff.launcher.data.network.IApiHelper;
-import com.xsf.realstuff.launcher.data.preference.ISharePreferenceHelper;
 
 /**
  * Author: xushangfei

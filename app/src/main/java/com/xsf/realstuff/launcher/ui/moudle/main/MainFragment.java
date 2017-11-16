@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.model.Order;
 import com.xsf.realstuff.launcher.ui.moudle.main.homepage.HomePageFragment;

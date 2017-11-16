@@ -14,15 +14,15 @@ import android.view.View;
 
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.base.BaseActivity;
+import com.xsf.realstuff.launcher.common.BaseActivity;
 import com.xsf.realstuff.launcher.data.model.Order;
 import com.xsf.realstuff.launcher.presenter.IOrderMvpPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.OrderPresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.MyItenTouchCallback;
 import com.xsf.realstuff.launcher.ui.adapter.OrderAdapter;
 import com.xsf.realstuff.launcher.ui.moudle.main.order.view.IOrderView;
-import com.xsf.realstuff.launcher.util.ListUtil;
-import com.xsf.realstuff.launcher.util.LogUtils;
+import com.xsf.framework.util.ListUtil;
+import com.xsf.framework.util.LogUtils;
 
 import java.io.IOException;
 import java.io.Serializable;

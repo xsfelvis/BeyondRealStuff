@@ -3,7 +3,7 @@ package com.xsf.realstuff.launcher.presenter.Impl;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.network.response.ThemeResponse;
 import com.xsf.realstuff.launcher.presenter.IBeautyPagePresenter;
-import com.xsf.realstuff.launcher.common.base.BasePresenter;
+import com.xsf.realstuff.launcher.common.BasePresenter;
 import com.xsf.realstuff.launcher.ui.moudle.beautypic.view.IBeautyView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;

@@ -11,8 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.xsf.realstuff.R;
-import com.xsf.realstuff.launcher.common.base.BaseActivity;
-import com.xsf.realstuff.launcher.common.base.BaseFragment;
+import com.xsf.realstuff.launcher.common.BaseActivity;
+import com.xsf.realstuff.launcher.common.BaseFragment;
 import com.xsf.realstuff.launcher.ui.widget.NavigationItemView;
 
 import java.util.ArrayList;

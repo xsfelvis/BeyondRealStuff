@@ -1,12 +1,12 @@
 package com.xsf.realstuff.launcher.presenter.Impl;
 
 
-import com.xsf.realstuff.launcher.common.base.BasePresenter;
+import com.xsf.realstuff.launcher.common.BasePresenter;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IDetailMVPPresenter;
 import com.xsf.realstuff.launcher.ui.moudle.detail.view.IDetailView;
-import com.xsf.realstuff.launcher.util.LogUtils;
+import com.xsf.framework.util.LogUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
 

@@ -11,7 +11,7 @@ import com.xsf.realstuff.BuildConfig;
 import com.xsf.realstuff.launcher.common.Constants;
 import com.xsf.realstuff.launcher.data.AppDataManager;
 import com.xsf.realstuff.launcher.data.IDataManger;
-import com.xsf.realstuff.launcher.util.LogUtils;
+import com.xsf.framework.util.LogUtils;
 
 import java.util.concurrent.TimeUnit;
 

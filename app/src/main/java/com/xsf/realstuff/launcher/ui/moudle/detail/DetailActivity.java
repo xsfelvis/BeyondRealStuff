@@ -26,14 +26,14 @@ import android.widget.ScrollView;
 
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.base.BaseActivity;
+import com.xsf.realstuff.launcher.common.BaseActivity;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IDetailMVPPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.DetailPresenterImpl;
 import com.xsf.realstuff.launcher.ui.moudle.detail.view.IDetailView;
 import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
-import com.xsf.realstuff.launcher.util.DensityUtil;
-import com.xsf.realstuff.launcher.util.image.ImageLoaderManager;
+import com.xsf.framework.util.DensityUtil;
+import com.xsf.framework.util.image.ImageLoaderManager;
 
 import java.lang.reflect.Field;
 

@@ -6,8 +6,8 @@ import android.view.View;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.xsf.realstuff.R;
-import com.xsf.realstuff.launcher.common.base.BaseActivity;
-import com.xsf.realstuff.launcher.util.image.ImageLoaderManager;
+import com.xsf.realstuff.launcher.common.BaseActivity;
+import com.xsf.framework.util.image.ImageLoaderManager;
 
 import butterknife.BindView;
 

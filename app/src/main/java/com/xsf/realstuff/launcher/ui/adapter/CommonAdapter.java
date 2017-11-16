@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.data.network.response.Result;
-import com.xsf.realstuff.launcher.util.TimeUtils;
-import com.xsf.realstuff.launcher.util.image.ImageLoaderManager;
+import com.xsf.framework.util.TimeUtils;
+import com.xsf.framework.util.image.ImageLoaderManager;
 
 import java.util.List;
 

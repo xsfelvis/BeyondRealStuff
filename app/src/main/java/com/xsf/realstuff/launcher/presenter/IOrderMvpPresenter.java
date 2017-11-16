@@ -1,7 +1,7 @@
 package com.xsf.realstuff.launcher.presenter;
 
 
-import com.xsf.realstuff.launcher.common.base.MvpPresenter;
+import com.xsf.framework.base.presenter.MvpPresenter;
 import com.xsf.realstuff.launcher.data.model.Order;
 import com.xsf.realstuff.launcher.ui.moudle.main.order.view.IOrderView;
 

@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.data.IDataManger;
-import com.xsf.realstuff.launcher.util.DataCleanManager;
+import com.xsf.framework.util.DataCleanManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
