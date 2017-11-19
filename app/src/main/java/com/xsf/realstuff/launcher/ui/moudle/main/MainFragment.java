@@ -2,10 +2,8 @@ package com.xsf.realstuff.launcher.ui.moudle.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -58,8 +56,6 @@ public class MainFragment extends AbstractLazyFragment {
     ImageView iconAdd;
     @BindView(R.id.bar_layout)
     AppBarLayout barLayout;
-    @BindView(R.id.floatButton)
-    FloatingActionButton floatButton;
     @BindView(R.id.addlayout)
     RelativeLayout addlayout;
 
@@ -101,7 +97,6 @@ public class MainFragment extends AbstractLazyFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initfbc();
         tabNames = new ArrayList<>();
         fragmentList = new ArrayList<>();
         //固定栏目
@@ -145,7 +140,7 @@ public class MainFragment extends AbstractLazyFragment {
         mUnbinder.unbind();
     }
 
-    @OnClick({R.id.icon_add, R.id.floatButton})
+    @OnClick({R.id.icon_add})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.icon_add:
@@ -176,8 +171,6 @@ public class MainFragment extends AbstractLazyFragment {
         getActivity().getTheme().resolveAttribute(R.attr.fbcolor, fbcolor, true);
         tablayout.setBackgroundColor(getResources().getColor(tablayoutcolor.resourceId));
         addlayout.setBackgroundColor(getResources().getColor(addlayoutcolor.resourceId));
-        floatButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(fbcolor.resourceId)));
-        initfbc();
     }
 
     @Override
@@ -216,13 +209,7 @@ public class MainFragment extends AbstractLazyFragment {
 
     }
 
-    private void initfbc() {
-        if (dataManager.getTheme()) {
-            floatButton.setImageResource(R.drawable.ic_search_brone_24dp);
-        } else {
-            floatButton.setImageResource(R.drawable.ic_search_white_24dp);
-        }
-    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

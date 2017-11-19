@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.xsf.framework.util.FrameWorkActivityManager;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.common.BaseActivity;
 import com.xsf.realstuff.launcher.common.BaseFragment;
@@ -22,6 +23,8 @@ import butterknife.BindView;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageBottomTabLayout;
 import me.majiajie.pagerbottomtabstrip.item.BaseTabItem;
+
+import static com.xsf.realstuff.launcher.common.Constants.Config.INTERVAL_TIME;
 
 
 public class MainActivity extends BaseActivity {
@@ -78,12 +81,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - exitTime) > 2000) {
+            if ((System.currentTimeMillis() - exitTime) > INTERVAL_TIME) {
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
-                //  System.exit(0);
+                FrameWorkActivityManager.getInstance().removeActivity(this);
             }
             return true;
         }

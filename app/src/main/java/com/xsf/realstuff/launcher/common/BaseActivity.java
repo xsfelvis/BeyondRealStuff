@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.xsf.framework.util.FrameWorkActivityManager;
 import com.xsf.framework.util.RxBus;
 import com.xsf.framework.util.image.ImageLoaderManager;
 import com.xsf.realstuff.R;
@@ -34,15 +35,17 @@ import io.reactivex.functions.Consumer;
  * Description:
  */
 
-public abstract class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity extends AppCompatActivity {
     IDataManger mDataManager;
     //ActivityComponent mActivityComponent;
     Observable<Boolean> mObservable;
 
     Unbinder mUnbinder;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FrameWorkActivityManager.getInstance().addActivity(this);
         inject();
         //mActivityComponent.inject(this);
         //initTheme();
@@ -62,9 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
 
-
-
-    protected  void refreshBackground(){
+    protected void refreshBackground() {
         TypedValue bgroundcolor = new TypedValue();
         View window = getWindow().getDecorView();
         getTheme().resolveAttribute(R.attr.backgroundcolor, bgroundcolor, true);
@@ -81,6 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         }
 
     }
+
     private void showAnimation() {
         final View decorview = getWindow().getDecorView();
         Bitmap cacheBitmap = getCacheBitmapFromView(decorview);
@@ -117,6 +119,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         }
         return bitmap;
     }
+
     protected abstract void refreshUI();
 
 
@@ -148,7 +151,6 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
 
-
     public void initToolbar(Toolbar toolbar) {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -166,11 +168,12 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
 
-    protected abstract int  getLayoutId();
+    protected abstract int getLayoutId();
 
     @Override
     protected void onDestroy() {
         mUnbinder.unbind();
+        FrameWorkActivityManager.getInstance().removeActivity(this);
         RxBus.getInstance().unregister(Boolean.class, mObservable);
         ImageLoaderManager.getImageLoader().clearMemoryCache(this);
         super.onDestroy();
