@@ -104,10 +104,6 @@ public class DetailActivity extends BaseActivity implements IDetailView {
         mPresenter.queryIsLike(detailId);
     }
 
-    @Override
-    protected void refreshUI() {
-
-    }
 
 
     private void initView() {

@@ -102,11 +102,6 @@ public class SettingFragment extends AbstractLazyFragment {
     }
 
     @Override
-    protected void refreshUI() {
-
-    }
-
-    @Override
     public void loadData() {
 
 

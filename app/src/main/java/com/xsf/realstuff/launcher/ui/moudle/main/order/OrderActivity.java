@@ -85,10 +85,6 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         presenter.getOrderList();
     }
 
-    @Override
-    protected void refreshUI() {
-
-    }
 
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

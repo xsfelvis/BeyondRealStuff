@@ -2,27 +2,25 @@ package com.xsf.realstuff.launcher.ui.moudle.main.homepage;
 
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
+import com.xsf.framework.util.LogUtils;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.Constants;
 import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.Constants;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IHomePagePresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.HomePagePresenterImpl;
@@ -30,8 +28,6 @@ import com.xsf.realstuff.launcher.ui.adapter.HomePageAdapter;
 import com.xsf.realstuff.launcher.ui.moudle.detail.DetailActivity;
 import com.xsf.realstuff.launcher.ui.moudle.main.homepage.view.IHomePageView;
 import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
-import com.xsf.framework.util.LogUtils;
-import com.xsf.framework.util.RecyclerViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -205,41 +201,6 @@ public class HomePageFragment extends AbstractLazyFragment implements IHomePageV
         refreshLayout.startRefresh();
     }
 
-    @Override
-    protected void refreshUI() {
-        TypedValue bground_itemcolor = new TypedValue();
-        TypedValue textcolor = new TypedValue();
-        TypedValue toplinecolor = new TypedValue();
-        TypedValue bottomlinecolor = new TypedValue();
-        TypedValue topviewcolor = new TypedValue();
-        TypedValue toptextcolor = new TypedValue();
-        Resources.Theme theme = mActivity.getTheme();
-        theme.resolveAttribute(R.attr.backgroundcolor_item, bground_itemcolor, true);
-        theme.resolveAttribute(R.attr.textcolor, textcolor, true);
-        theme.resolveAttribute(R.attr.topline, toplinecolor, true);
-        theme.resolveAttribute(R.attr.bottomline, bottomlinecolor, true);
-        theme.resolveAttribute(R.attr.topview, topviewcolor, true);
-        theme.resolveAttribute(R.attr.toptextcolor, toptextcolor, true);
-        Resources resources = getResources();
-        stickyView.setBackgroundColor(resources.getColor(topviewcolor.resourceId));
-        stickyView.setTextColor(resources.getColor(toptextcolor.resourceId));
-        int childCount = rvIndex.getChildCount();
-        for (int childIndex = 0; childIndex < childCount; childIndex++) {
-            LinearLayout ll = (LinearLayout) rvIndex.getChildAt(childIndex).findViewById(R.id.item_container);
-            ll.setBackgroundColor(resources.getColor(bground_itemcolor.resourceId));
-            TextView title = (TextView) ll.findViewById(R.id.tv_title);
-            TextView tv_top = (TextView) ll.findViewById(R.id.tv_top);
-            View view1 = ll.findViewById(R.id.topline);
-            View view2 = rvIndex.getChildAt(childIndex).findViewById(R.id.bottomline);
-            title.setTextColor(resources.getColor(textcolor.resourceId));
-            tv_top.setTextColor(resources.getColor(toptextcolor.resourceId));
-            tv_top.setBackgroundColor(resources.getColor(topviewcolor.resourceId));
-            view1.setBackgroundColor(resources.getColor(toplinecolor.resourceId));
-            view2.setBackgroundColor(resources.getColor(bottomlinecolor.resourceId));
-        }
-        RecyclerViewUtil.invalidateCacheItem(rvIndex);
-
-    }
 
     @Override
     public void showError() {

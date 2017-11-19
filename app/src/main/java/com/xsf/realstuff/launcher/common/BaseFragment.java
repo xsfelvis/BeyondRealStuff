@@ -7,14 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 
-import com.xsf.realstuff.R;
-import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
-import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
-import com.xsf.realstuff.launcher.ui.moudle.setting.SettingFragment;
 import com.xsf.framework.util.RxBus;
+import com.xsf.realstuff.R;
+import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
+import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
+import com.xsf.realstuff.launcher.ui.moudle.setting.SettingFragment;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 
 /**
  * Author: xushangfei
@@ -38,13 +37,6 @@ public abstract class BaseFragment extends Fragment {
         if (context instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) context;
             mActivity = activity;
-            mObservable = RxBus.getInstance().register(Boolean.class);
-            mObservable.subscribe(new Consumer<Boolean>() {
-                @Override
-                public void accept(Boolean aBoolean) throws Exception {
-                    refreshUI();
-                }
-            });
         }
 
     }
@@ -83,7 +75,6 @@ public abstract class BaseFragment extends Fragment {
         return fragment;
     }
 
-    protected abstract void refreshUI();
 
 
 }

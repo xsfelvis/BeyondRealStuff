@@ -19,6 +19,7 @@ public class PicDetailActivity extends BaseActivity {
     @BindView(R.id.photo_view)
     PhotoView photoView;
     Unbinder mUnbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +36,6 @@ public class PicDetailActivity extends BaseActivity {
         ImageLoaderManager.getImageLoader().displayImage(this, getIntent().getStringExtra("img_url"), photoView);
     }
 
-    @Override
-    protected void refreshUI() {
-
-    }
 
     @Override
     protected void onDestroy() {

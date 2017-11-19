@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -161,17 +160,6 @@ public class MainFragment extends AbstractLazyFragment {
         }
     }
 
-    @Override
-    protected void refreshUI() {
-        TypedValue tablayoutcolor = new TypedValue();
-        TypedValue addlayoutcolor = new TypedValue();
-        TypedValue fbcolor = new TypedValue();
-        getActivity().getTheme().resolveAttribute(R.attr.tablayoutbgcolor, tablayoutcolor, true);
-        getActivity().getTheme().resolveAttribute(R.attr.addlayout, addlayoutcolor, true);
-        getActivity().getTheme().resolveAttribute(R.attr.fbcolor, fbcolor, true);
-        tablayout.setBackgroundColor(getResources().getColor(tablayoutcolor.resourceId));
-        addlayout.setBackgroundColor(getResources().getColor(addlayoutcolor.resourceId));
-    }
 
     @Override
     public void loadData() {

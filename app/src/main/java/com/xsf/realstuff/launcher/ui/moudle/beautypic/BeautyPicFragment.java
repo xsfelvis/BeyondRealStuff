@@ -163,11 +163,6 @@ public class BeautyPicFragment extends AbstractLazyFragment implements IBeautyVi
     }
 
     @Override
-    protected void refreshUI() {
-        refreshToolbar(mToolbar);
-    }
-
-    @Override
     public void loadData() {
         refreshLayout.startRefresh();
     }

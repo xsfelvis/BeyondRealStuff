@@ -44,8 +44,6 @@ public class RxBus {
 
         Subject<T> subject = PublishSubject.create();
         subjectList.add(subject);
-
-        //System.out.println("注册到rxbus");
         return subject;
     }
 
@@ -59,7 +57,6 @@ public class RxBus {
             subjects.remove(observable);
             if (subjects.isEmpty()) {
                 subjectMapper.remove(tag);
-                //System.out.println("从rxbus取消注册");
             }
         }
     }

@@ -6,28 +6,26 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.xsf.framework.util.ItemDecoration;
+import com.xsf.framework.util.LogUtils;
+import com.xsf.framework.util.RecyclerViewUtil;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.Constants;
 import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.common.BaseFragment;
+import com.xsf.realstuff.launcher.common.Constants;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.ICommonMvpPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.CommonPresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.CommonAdapter;
 import com.xsf.realstuff.launcher.ui.moudle.detail.DetailActivity;
 import com.xsf.realstuff.launcher.ui.moudle.main.theme.view.ICommonView;
-import com.xsf.framework.util.ItemDecoration;
-import com.xsf.framework.util.LogUtils;
-import com.xsf.framework.util.RecyclerViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +34,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
-
-import static com.xsf.framework.util.RecyclerViewUtil.invalidateCacheItem;
 
 
 /**
@@ -74,18 +70,6 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
         commonPresenter = new CommonPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
     }
 
-    @Override
-    protected void refreshUI() {
-        mRecyclerView.addItemDecoration(new ItemDecoration(getActivity(), ItemDecoration.VERTICAL_LIST));
-        int childCount = mRecyclerView.getChildCount();
-        for (int childIndex = 0; childIndex < childCount; childIndex++) {
-            TextView textView = (TextView) mRecyclerView.getChildAt(childIndex).findViewById(R.id.text);
-            TypedValue textColor = new TypedValue();
-            getActivity().getTheme().resolveAttribute(R.attr.textcolor, textColor, true);
-            textView.setTextColor(getResources().getColor(textColor.resourceId));
-        }
-        invalidateCacheItem(mRecyclerView);
-    }
 
     @Nullable
     @Override
