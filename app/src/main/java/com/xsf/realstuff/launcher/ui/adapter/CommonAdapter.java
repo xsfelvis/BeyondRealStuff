@@ -64,7 +64,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.ViewHolder
             // TODO: 2017/11/8 待增加数据库
             /*if (result.getImg() != null && result.getImg().size() > 0) {
                 holder.image.setVisibility(View.VISIBLE);
-                Glide.with(holder.itemView.getContext()).load(result.getImg().get(0).getImageUrl())
+                Glide.with(holder.itemView.getContext()).load(result.getImg().getClient(0).getImageUrl())
                         .asBitmap().centerCrop().into(holder.image);
             }*/
         }else{

@@ -24,7 +24,11 @@
 - 优化recycler工具类
 - webview优化
 - 使用约束布局修改
-- greenDao3.0
+- GreenDao3.0
 - 引入github模块
 - 涉及到的三方库的源码分析
 - 加载动画
+- 冷启动
+- gradle 统一依赖管理(done)
+- 统一loading 加载失败、空页面
+- 图片加载优化

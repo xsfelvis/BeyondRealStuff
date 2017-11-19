@@ -15,7 +15,7 @@ public class Constants {
     }
 
 
-    public static final String baseUrl = "http://gank.io/api/";
+    public static final String GANKIO = "http://gank.io/api/";
 
     public static final int PAGECOUNT = 20;
 

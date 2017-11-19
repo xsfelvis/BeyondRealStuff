@@ -24,7 +24,7 @@ public class AppApiHelper implements IApiHelper {
 
 
     private AppApiHelper() {
-        this.mApiSerVice = RealStuffApplication.getRetrofit().create(IApiService.class);
+        this.mApiSerVice = RealStuffApplication.getGankIoRetrofit().create(IApiService.class);
     }
 
     @Override
