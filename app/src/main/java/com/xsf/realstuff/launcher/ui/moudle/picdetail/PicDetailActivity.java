@@ -5,21 +5,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.xsf.framework.util.image.ImageLoaderManager;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.common.BaseActivity;
-import com.xsf.framework.util.image.ImageLoaderManager;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class PicDetailActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.photo_view)
     PhotoView photoView;
-
+    Unbinder mUnbinder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pic_detail);
+        mUnbinder = ButterKnife.bind(this);
         initToolbar(toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -28,8 +32,7 @@ public class PicDetailActivity extends BaseActivity {
                 PicDetailActivity.super.onBackPressed();
             }
         });
-        ImageLoaderManager.getImageLoader().displayImage(this,getIntent().getStringExtra("img_url"),photoView);
-        //Glide.with(this).load(getIntent().getStringExtra("img_url")).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade().into(photoView);
+        ImageLoaderManager.getImageLoader().displayImage(this, getIntent().getStringExtra("img_url"), photoView);
     }
 
     @Override
@@ -38,7 +41,8 @@ public class PicDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_pic_detail;
+    protected void onDestroy() {
+        mUnbinder.unbind();
+        super.onDestroy();
     }
 }

@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
+import com.xsf.framework.util.ListUtil;
+import com.xsf.framework.util.LogUtils;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
 import com.xsf.realstuff.launcher.common.BaseActivity;
@@ -21,8 +23,6 @@ import com.xsf.realstuff.launcher.presenter.Impl.OrderPresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.MyItenTouchCallback;
 import com.xsf.realstuff.launcher.ui.adapter.OrderAdapter;
 import com.xsf.realstuff.launcher.ui.moudle.main.order.view.IOrderView;
-import com.xsf.framework.util.ListUtil;
-import com.xsf.framework.util.LogUtils;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -31,6 +31,8 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 
 import static com.xsf.realstuff.launcher.common.Constants.CLOSESTATUS;
@@ -55,15 +57,13 @@ public class OrderActivity extends BaseActivity implements IOrderView {
     public static final int ORDERCHANGE = 100;
 
     IOrderMvpPresenter<IOrderView> presenter;
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_order;
-    }
+    Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_order);
+        mUnbinder = ButterKnife.bind(this);
         presenter = new OrderPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
         presenter.attachView(this);
         initToolbar(toolbar);
@@ -206,6 +206,7 @@ public class OrderActivity extends BaseActivity implements IOrderView {
     @Override
     protected void onDestroy() {
         presenter.onDetchView();
+        mUnbinder.unbind();
         super.onDestroy();
     }
 

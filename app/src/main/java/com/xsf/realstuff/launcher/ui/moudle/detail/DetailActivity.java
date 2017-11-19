@@ -88,14 +88,9 @@ public class DetailActivity extends BaseActivity implements IDetailView {
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_detail;
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_detail);
         mUnbinder = ButterKnife.bind(this);
         mPresenter = new DetailPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
         mPresenter.attachView(this);

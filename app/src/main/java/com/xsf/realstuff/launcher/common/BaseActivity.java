@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     //ActivityComponent mActivityComponent;
     Observable<Boolean> mObservable;
 
-    Unbinder mUnbinder;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,8 +49,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         inject();
         //mActivityComponent.inject(this);
         //initTheme();
-        setContentView(getLayoutId());
-        mUnbinder = ButterKnife.bind(this);
+        //setContentView(getLayoutId());
+
         setColorStatusBar();
         mObservable = RxBus.getInstance().register(Boolean.class);
         mObservable.subscribe(new Consumer<Boolean>() {
@@ -168,11 +168,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    protected abstract int getLayoutId();
 
     @Override
     protected void onDestroy() {
-        mUnbinder.unbind();
+
         FrameWorkActivityManager.getInstance().removeActivity(this);
         RxBus.getInstance().unregister(Boolean.class, mObservable);
         ImageLoaderManager.getImageLoader().clearMemoryCache(this);

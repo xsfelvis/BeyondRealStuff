@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageBottomTabLayout;
 import me.majiajie.pagerbottomtabstrip.item.BaseTabItem;
@@ -37,18 +39,14 @@ public class MainActivity extends BaseActivity {
     PageBottomTabLayout mTab;
     @BindView(R.id.viewpager)
     ViewPager mViewpager;
-
+    Unbinder mUnbinder;
     private List<Fragment> mFragmentList = new ArrayList<>();
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mUnbinder = ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
 
         NavigationController navigationController = mTab.custom()
@@ -74,6 +72,12 @@ public class MainActivity extends BaseActivity {
         mViewpager.setAdapter(pagerAdapter);
         navigationController.setupWithViewPager(mViewpager);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        mUnbinder.unbind();
+        super.onDestroy();
     }
 
     private long exitTime = 0;
