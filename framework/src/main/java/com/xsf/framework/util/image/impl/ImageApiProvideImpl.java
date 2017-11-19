@@ -115,6 +115,10 @@ public class ImageApiProvideImpl implements IImageApiProvider {
 
     @Override
     public void clearMemoryCache(Context context) {
+        if (context == null) {
+            return;
+        }
+        Glide.get(context).clearMemory();
 
     }
 

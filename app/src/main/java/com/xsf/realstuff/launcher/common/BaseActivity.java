@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.xsf.framework.util.RxBus;
+import com.xsf.framework.util.image.ImageLoaderManager;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.data.IDataManger;
 
@@ -171,6 +172,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected void onDestroy() {
         mUnbinder.unbind();
         RxBus.getInstance().unregister(Boolean.class, mObservable);
+        ImageLoaderManager.getImageLoader().clearMemoryCache(this);
         super.onDestroy();
     }
 
