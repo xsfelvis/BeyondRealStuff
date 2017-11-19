@@ -12,7 +12,7 @@ import io.reactivex.Observable;
  */
 
 public class AppApiHelper implements IApiHelper {
-    IApiService mApiSerVice;
+    IGanIoService mGankIoSerVice;
 
     public static AppApiHelper getInstance() {
         return SingleHolder.instance;
@@ -24,16 +24,16 @@ public class AppApiHelper implements IApiHelper {
 
 
     private AppApiHelper() {
-        this.mApiSerVice = RealStuffApplication.getGankIoRetrofit().create(IApiService.class);
+        this.mGankIoSerVice = RealStuffApplication.getGankIoRetrofit().create(IGanIoService.class);
     }
 
     @Override
     public Observable<ThemeResponse> getThemeDataCall(String path) {
-        return mApiSerVice.getThemeDataCall(path);
+        return mGankIoSerVice.getThemeDataCall(path);
     }
 
     @Override
     public Observable<ThemeResponse> getSearchDataCall(String content, String type, String page) {
-        return mApiSerVice.getSearchDataCall(content, type, page);
+        return mGankIoSerVice.getSearchDataCall(content, type, page);
     }
 }
