@@ -44,18 +44,16 @@ import static com.xsf.realstuff.launcher.common.Constants.OPENSTATUS;
  */
 
 public class OrderActivity extends BaseActivity implements IOrderView {
+    public static final String ORDERLIST = "orderlist";
+    public static final int ORDERCHANGE = 100;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-
-
     private List<Order> orderList = new ArrayList<>();
     private List<Order> originList;
     private OrderAdapter orderAdapter;
-
-    public static final int ORDERCHANGE = 100;
-
     IOrderMvpPresenter<IOrderView> presenter;
     Unbinder mUnbinder;
 
@@ -67,7 +65,7 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         presenter = new OrderPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
         presenter.attachView(this);
         initToolbar(toolbar);
-        toolbar.setTitle("拖拽可排序");
+        toolbar.setTitle(getResources().getString(R.string.custom_order));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +73,7 @@ public class OrderActivity extends BaseActivity implements IOrderView {
                 LogUtils.v(originList + "======" + orderList);
                 if (isChange) {
                     presenter.setOrderString(orderList);
-                    setResult(ORDERCHANGE, new Intent().putExtra("orderlist", (Serializable) orderList));
+                    setResult(ORDERCHANGE, new Intent().putExtra(ORDERLIST, (Serializable) orderList));
                 }
                 finish();
             }

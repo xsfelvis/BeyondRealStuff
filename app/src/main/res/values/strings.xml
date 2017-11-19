@@ -1,15 +1,14 @@
 <resources>
-    <string name="app_name">秋点兵</string>
+    <string name="app_name">秋水寒</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ttitle_homepage">首页</string>
+    <string name="title_android">Android</string>
+    <string name="title_ios">iOS</string>
+    <string name="title_web">前端</string>
 
-    <string name="title1">首页</string>
-    <string name="title2">android</string>
-    <string name="title3">ios</string>
-    <string name="title4">前端</string>
-
-    <string name="main2">福利</string>
-    <string name="main3">收藏</string>
+    <string name="title_welfare">福利</string>
+    <string name="collect">收藏</string>
+    <string name="custom_order">长按,拖拽可排序</string>
 
 
     <string name="translateName">translate_search</string>

@@ -7,13 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 
-import com.xsf.framework.util.RxBus;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
 import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
 import com.xsf.realstuff.launcher.ui.moudle.setting.SettingFragment;
-
-import io.reactivex.Observable;
 
 /**
  * Author: xushangfei
@@ -23,7 +20,6 @@ import io.reactivex.Observable;
 
 public abstract class BaseFragment extends Fragment {
     protected BaseActivity mActivity;
-    Observable<Boolean> mObservable;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +41,6 @@ public abstract class BaseFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mActivity = null;
-        RxBus.getInstance().unregister(Boolean.class, mObservable);
     }
 
     protected void refreshToolbar(Toolbar toolbar) {

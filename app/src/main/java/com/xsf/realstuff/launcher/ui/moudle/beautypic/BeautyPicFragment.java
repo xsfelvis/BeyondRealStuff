@@ -82,7 +82,7 @@ public class BeautyPicFragment extends AbstractLazyFragment implements IBeautyVi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mToolbar.setTitle(R.string.main2);
+        mToolbar.setTitle(R.string.title_welfare);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvMz.setLayoutManager(staggeredGridLayoutManager);
         mBeautyPicAdapter = new BeautyPicAdapter(getActivity(), R.layout.item_mz, list);

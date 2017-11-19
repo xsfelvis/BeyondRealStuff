@@ -13,12 +13,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.xsf.framework.util.FrameWorkActivityManager;
-import com.xsf.framework.util.RxBus;
 import com.xsf.framework.util.image.ImageLoaderManager;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.data.IDataManger;
-
-import io.reactivex.Observable;
 
 /**
  * Author: xushangfei
@@ -29,7 +26,6 @@ import io.reactivex.Observable;
 public abstract class BaseActivity extends AppCompatActivity {
     IDataManger mDataManager;
     //ActivityComponent mActivityComponent;
-    Observable<Boolean> mObservable;
 
 
 
@@ -93,7 +89,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
 
         FrameWorkActivityManager.getInstance().removeActivity(this);
-        RxBus.getInstance().unregister(Boolean.class, mObservable);
         ImageLoaderManager.getImageLoader().clearMemoryCache(this);
         super.onDestroy();
     }
