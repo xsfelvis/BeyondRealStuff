@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.xsf.framework.util.ListUtil;
@@ -69,13 +70,7 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isChange = compareList(originList, orderList);
-                LogUtils.v(originList + "======" + orderList);
-                if (isChange) {
-                    presenter.setOrderString(orderList);
-                    setResult(ORDERCHANGE, new Intent().putExtra(ORDERLIST, (Serializable) orderList));
-                }
-                finish();
+                ResponseResult();
             }
         });
         initRecyclerView();
@@ -180,6 +175,32 @@ public class OrderActivity extends BaseActivity implements IOrderView {
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            ResponseResult();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        presenter.onDetchView();
+        mUnbinder.unbind();
+        super.onDestroy();
+    }
+
+    private void ResponseResult() {
+        boolean isChange = compareList(originList, orderList);
+        LogUtils.v(originList + "======" + orderList);
+        if (isChange) {
+            presenter.setOrderString(orderList);
+            setResult(ORDERCHANGE, new Intent().putExtra(ORDERLIST, (Serializable) orderList));
+        }
+        finish();
+    }
+
     private boolean compareList(List<Order> list1, List<Order> list2) {
         if (list1 != null && list2 != null) {
             if (list1.size() == list2.size()) {
@@ -196,13 +217,5 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         }
         return false;
     }
-
-    @Override
-    protected void onDestroy() {
-        presenter.onDetchView();
-        mUnbinder.unbind();
-        super.onDestroy();
-    }
-
 
 }
