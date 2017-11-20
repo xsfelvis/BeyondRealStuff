@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.xsf.framework.util.FrameWorkActivityManager;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.common.BaseActivity;
-import com.xsf.realstuff.launcher.common.BaseFragment;
+import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
+import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
+import com.xsf.realstuff.launcher.ui.moudle.setting.SettingFragment;
 import com.xsf.realstuff.launcher.ui.widget.NavigationItemView;
 
 import java.util.ArrayList;
@@ -54,9 +56,9 @@ public class MainActivity extends BaseActivity {
                 .addItem(newItem(R.mipmap.tab_fuli_normal, R.mipmap.tab_fuli_selected))
                 .addItem(newItem(R.mipmap.tab_profile_normal, R.mipmap.tab_profile_selected))
                 .build();
-        mFragmentList.add(BaseFragment.newInstance(0));
-        mFragmentList.add(BaseFragment.newInstance(1));
-        mFragmentList.add(BaseFragment.newInstance(2));
+        mFragmentList.add(MainFragment.newInstance());
+        mFragmentList.add(BeautyPicFragment.newInstance());
+        mFragmentList.add(SettingFragment.newInstance());
         mViewpager.setOffscreenPageLimit(mFragmentList.size());
         PagerAdapter pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -86,7 +88,7 @@ public class MainActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > INTERVAL_TIME) {
-                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.click_and_quit), Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
@@ -103,8 +105,6 @@ public class MainActivity extends BaseActivity {
         navigationItemView.initialize(drawble, drawbleSelect);
         return navigationItemView;
     }
-
-
 
 
 }

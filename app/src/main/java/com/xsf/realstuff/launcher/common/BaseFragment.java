@@ -8,9 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 
 import com.xsf.realstuff.R;
-import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
-import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
-import com.xsf.realstuff.launcher.ui.moudle.setting.SettingFragment;
 
 /**
  * Author: xushangfei
@@ -48,28 +45,5 @@ public abstract class BaseFragment extends Fragment {
         getActivity().getTheme().resolveAttribute(R.attr.toolbarcolor, typedValue, true);
         toolbar.setBackgroundColor(getResources().getColor(typedValue.resourceId));
     }
-
-    public static BaseFragment newInstance(int position) {
-
-        BaseFragment fragment;
-        switch (position) {
-            case 0:
-                fragment = MainFragment.newInstance();
-                break;
-            case 1:
-                fragment = BeautyPicFragment.newInstance();
-                break;
-            case 2:
-                fragment = SettingFragment.newInstance();
-                break;
-            default:
-                fragment = MainFragment.newInstance();
-                break;
-        }
-
-        return fragment;
-    }
-
-
 
 }

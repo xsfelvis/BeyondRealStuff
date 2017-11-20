@@ -31,6 +31,7 @@ import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IDetailMVPPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.DetailPresenterImpl;
 import com.xsf.realstuff.launcher.ui.moudle.detail.view.IDetailView;
+import com.xsf.realstuff.launcher.ui.moudle.main.theme.CommonFragment;
 import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
 import com.xsf.framework.util.DensityUtil;
 import com.xsf.framework.util.image.ImageLoaderManager;
@@ -94,7 +95,7 @@ public class DetailActivity extends BaseActivity implements IDetailView {
         mUnbinder = ButterKnife.bind(this);
         mPresenter = new DetailPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
         mPresenter.attachView(this);
-        result = getIntent().getParcelableExtra("bean");
+        result = getIntent().getParcelableExtra(CommonFragment.BEAN);
         webUrl = result.getUrl();
         detailId = result.getGanhuo_id() == null ? result.getId() : result.getGanhuo_id();
         result.setId(detailId);
@@ -103,7 +104,6 @@ public class DetailActivity extends BaseActivity implements IDetailView {
         initListener();
         mPresenter.queryIsLike(detailId);
     }
-
 
 
     private void initView() {

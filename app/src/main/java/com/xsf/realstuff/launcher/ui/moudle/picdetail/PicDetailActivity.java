@@ -15,7 +15,7 @@ import butterknife.Unbinder;
 
 public class PicDetailActivity extends BaseActivity {
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @BindView(R.id.photo_view)
     PhotoView photoView;
     Unbinder mUnbinder;
@@ -25,9 +25,9 @@ public class PicDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pic_detail);
         mUnbinder = ButterKnife.bind(this);
-        initToolbar(toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        initToolbar(mToolbar);
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PicDetailActivity.super.onBackPressed();

@@ -45,11 +45,11 @@ public class HomePageFragment extends AbstractLazyFragment implements IHomePageV
     public static final int INITPAGECOUNT = 1;
 
     @BindView(R.id.rv_index)
-    RecyclerView rvIndex;
+    RecyclerView mRvIndex;
     @BindView(R.id.tv_top)
-    TextView stickyView;
+    TextView mStickyView;
     @BindView(R.id.refreshLayout)
-    TwinklingRefreshLayout refreshLayout;
+    TwinklingRefreshLayout mRefreshLayout;
 
     private HomePageAdapter mAdapter = new HomePageAdapter();
     private int mPageCount = INITPAGECOUNT;
@@ -87,38 +87,38 @@ public class HomePageFragment extends AbstractLazyFragment implements IHomePageV
 
         // mAdapter = new IndexAdapter();
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        rvIndex.setLayoutManager(mLinearLayoutManager);
-        rvIndex.setAdapter(mAdapter);
-        rvIndex.setItemAnimator(new DefaultItemAnimator());
+        mRvIndex.setLayoutManager(mLinearLayoutManager);
+        mRvIndex.setAdapter(mAdapter);
+        mRvIndex.setItemAnimator(new DefaultItemAnimator());
         //吸顶布局滚动监听
-        rvIndex.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRvIndex.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
                 View stickyInfoView = recyclerView.findChildViewUnder(
-                        stickyView.getMeasuredWidth() / 2, 5);
+                        mStickyView.getMeasuredWidth() / 2, 5);
 
                 if (stickyInfoView != null && stickyInfoView.getContentDescription() != null) {
-                    stickyView.setText(String.valueOf(stickyInfoView.getContentDescription()));
+                    mStickyView.setText(String.valueOf(stickyInfoView.getContentDescription()));
                 }
 
                 View transInfoView = recyclerView.findChildViewUnder(
-                        stickyView.getMeasuredWidth() / 2, stickyView.getMeasuredHeight() + 1);
+                        mStickyView.getMeasuredWidth() / 2, mStickyView.getMeasuredHeight() + 1);
 
                 if (transInfoView != null && transInfoView.getTag() != null) {
 
                     int transViewStatus = (int) transInfoView.getTag();
-                    int dealtY = transInfoView.getTop() - stickyView.getMeasuredHeight();
+                    int dealtY = transInfoView.getTop() - mStickyView.getMeasuredHeight();
 
                     if (transViewStatus == HomePageAdapter.HAS_STICKY_VIEW) {
                         if (transInfoView.getTop() > 0) {
-                            stickyView.setTranslationY(dealtY);
+                            mStickyView.setTranslationY(dealtY);
                         } else {
-                            stickyView.setTranslationY(0);
+                            mStickyView.setTranslationY(0);
                         }
                     } else if (transViewStatus == HomePageAdapter.NONE_STICKY_VIEW) {
-                        stickyView.setTranslationY(0);
+                        mStickyView.setTranslationY(0);
                     }
                 }
             }
@@ -145,11 +145,11 @@ public class HomePageFragment extends AbstractLazyFragment implements IHomePageV
 
         ProgressLayout header = new ProgressLayout(getActivity());
         header.setColorSchemeResources(R.color.Blue, R.color.Orange, R.color.Yellow, R.color.Green);
-        refreshLayout.setHeaderView(header);
-        refreshLayout.setFloatRefresh(true);
-        refreshLayout.setOverScrollRefreshShow(false);
-        refreshLayout.setAutoLoadMore(true);
-        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+        mRefreshLayout.setHeaderView(header);
+        mRefreshLayout.setFloatRefresh(true);
+        mRefreshLayout.setOverScrollRefreshShow(false);
+        mRefreshLayout.setAutoLoadMore(true);
+        mRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
                 new Handler().postDelayed(new Runnable() {
@@ -198,7 +198,7 @@ public class HomePageFragment extends AbstractLazyFragment implements IHomePageV
 
     @Override
     public void loadData() {
-        refreshLayout.startRefresh();
+        mRefreshLayout.startRefresh();
     }
 
 
@@ -206,8 +206,8 @@ public class HomePageFragment extends AbstractLazyFragment implements IHomePageV
     public void showError() {
         LogUtils.v("error");
         Constants.ERROR = true;
-        refreshLayout.finishRefreshing();
-        refreshLayout.finishLoadmore();
+        mRefreshLayout.finishRefreshing();
+        mRefreshLayout.finishLoadmore();
     }
 
     @Override
@@ -215,7 +215,7 @@ public class HomePageFragment extends AbstractLazyFragment implements IHomePageV
         LogUtils.d(TAG,"showList");
         this.mList.addAll(resultList);
         mAdapter.notifyData(this.mList);
-        refreshLayout.finishRefreshing();
-        refreshLayout.finishLoadmore();
+        mRefreshLayout.finishRefreshing();
+        mRefreshLayout.finishLoadmore();
     }
 }

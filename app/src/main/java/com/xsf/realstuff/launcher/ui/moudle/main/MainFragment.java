@@ -50,29 +50,29 @@ public class MainFragment extends AbstractLazyFragment {
     public static final String TAG = "MainFragment";
 
     @BindView(R.id.tablayout)
-    TabLayout tablayout;
+    TabLayout mTablayout;
     @BindView(R.id.viewpager)
-    ViewPager viewpager;
+    ViewPager mViewpager;
     @BindView(R.id.icon_add)
-    ImageView iconAdd;
+    ImageView mIconAdd;
     @BindView(R.id.bar_layout)
-    AppBarLayout barLayout;
+    AppBarLayout mBarLayout;
     @BindView(R.id.addlayout)
-    RelativeLayout addlayout;
+    RelativeLayout mAddlayout;
 
-    private IDataManger dataManager;
-    private List<String> tabNames;
-    private List<Fragment> fragmentList;
+    private IDataManger mDataManager;
+    private List<String> mTabNames;
+    private List<Fragment> mFragmentList;
     private Unbinder mUnbinder;
 
-    private FragmentStatePagerAdapter pagerAdapter;
+    private FragmentStatePagerAdapter mPagerAdapter;
 
     public static MainFragment newInstance() {
         return new MainFragment();
     }
 
     public MainFragment() {
-        this.dataManager = RealStuffApplication.getDadaManager();
+        this.mDataManager = RealStuffApplication.getDadaManager();
     }
 
     @Override
@@ -98,36 +98,19 @@ public class MainFragment extends AbstractLazyFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        tabNames = new ArrayList<>();
-        fragmentList = new ArrayList<>();
+        mTabNames = new ArrayList<>();
+        mFragmentList = new ArrayList<>();
         //固定栏目
-        fragmentList.add(HomePageFragment.newInstance());
-        tabNames.add(getResources().getString(R.string.ttitle_homepage));
+        mFragmentList.add(HomePageFragment.newInstance());
+        mTabNames.add(getResources().getString(R.string.ttitle_homepage));
 
-        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         //初始化栏目数据
-        String orderString = dataManager.getOrderString();
-        LogUtils.d(TAG, orderString);
-        if ("".equals(orderString)) {
-            tabNames.add(getResources().getString(R.string.title_android));
-            tabNames.add(getResources().getString(R.string.title_ios));
-            tabNames.add(getResources().getString(R.string.title_web));
-            fragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_android)));
-            fragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_ios)));
-            fragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_web)));
-            viewpager.setOffscreenPageLimit(fragmentList.size());
-        } else {
-            Gson gson = new Gson();
-            List<Order> orders = gson.fromJson(orderString,
-                    new TypeToken<List<Order>>() {
-                    }.getType());
-
-            resetOrders(orders);
-        }
-        viewpager.setOffscreenPageLimit(fragmentList.size());
-        pagerAdapter = new ViewpagerAdapter(getChildFragmentManager());
-        viewpager.setAdapter(pagerAdapter);
-        tablayout.setupWithViewPager(viewpager);
+        initTheme();
+        mViewpager.setOffscreenPageLimit(mFragmentList.size());
+        mPagerAdapter = new ViewpagerAdapter(getChildFragmentManager());
+        mViewpager.setAdapter(mPagerAdapter);
+        mTablayout.setupWithViewPager(mViewpager);
     }
 
 
@@ -163,12 +146,12 @@ public class MainFragment extends AbstractLazyFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return fragmentList.get(position);
+            return mFragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            return fragmentList.size();
+            return mFragmentList.size();
         }
 
         @Override
@@ -178,7 +161,7 @@ public class MainFragment extends AbstractLazyFragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return tabNames.get(position);
+            return mTabNames.get(position);
         }
 
     }
@@ -188,16 +171,16 @@ public class MainFragment extends AbstractLazyFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ORDERCHANGE) {
-            viewpager.setCurrentItem(0);
+            mViewpager.setCurrentItem(0);
             List<Order> orders = (List<Order>) data.getSerializableExtra(ORDERLIST);
-            tabNames.clear();
-            fragmentList.clear();
-            fragmentList.add(HomePageFragment.newInstance());
-            tabNames.add(getResources().getString(R.string.ttitle_homepage));
+            mTabNames.clear();
+            mFragmentList.clear();
+            mFragmentList.add(HomePageFragment.newInstance());
+            mTabNames.add(getResources().getString(R.string.ttitle_homepage));
             resetOrders(orders);
-            tablayout.setupWithViewPager(viewpager);
-            pagerAdapter.notifyDataSetChanged();
-            viewpager.setOffscreenPageLimit(fragmentList.size());
+            mTablayout.setupWithViewPager(mViewpager);
+            mPagerAdapter.notifyDataSetChanged();
+            mViewpager.setOffscreenPageLimit(mFragmentList.size());
 
         }
     }
@@ -208,10 +191,33 @@ public class MainFragment extends AbstractLazyFragment {
         }
         for (Order order : orders) {
             if (order.getStatus() == OPENSTATUS) {
-                tabNames.add(order.getTheme());
-                fragmentList.add(CommonFragment.newInstance(order.getTheme()));
+                mTabNames.add(order.getTheme());
+                mFragmentList.add(CommonFragment.newInstance(order.getTheme()));
             }
         }
     }
+
+
+    private void initTheme() {
+        String orderString = mDataManager.getOrderString();
+        LogUtils.d(TAG, orderString);
+        if ("".equals(orderString)) {
+            mTabNames.add(getResources().getString(R.string.title_android));
+            mTabNames.add(getResources().getString(R.string.title_ios));
+            mTabNames.add(getResources().getString(R.string.title_web));
+            mFragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_android)));
+            mFragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_ios)));
+            mFragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_web)));
+            mViewpager.setOffscreenPageLimit(mFragmentList.size());
+        } else {
+            Gson gson = new Gson();
+            List<Order> orders = gson.fromJson(orderString,
+                    new TypeToken<List<Order>>() {
+                    }.getType());
+
+            resetOrders(orders);
+        }
+    }
+
 
 }

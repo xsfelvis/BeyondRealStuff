@@ -49,13 +49,13 @@ public class OrderActivity extends BaseActivity implements IOrderView {
     public static final int ORDERCHANGE = 100;
 
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    private List<Order> orderList = new ArrayList<>();
-    private List<Order> originList;
-    private OrderAdapter orderAdapter;
-    IOrderMvpPresenter<IOrderView> presenter;
+    RecyclerView mRecyclerView;
+    private List<Order> mOrderList = new ArrayList<>();
+    private List<Order> mOriginList;
+    private OrderAdapter mOrderAdapter;
+    IOrderMvpPresenter<IOrderView> mOrderPresenter;
     Unbinder mUnbinder;
 
     @Override
@@ -63,11 +63,11 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         mUnbinder = ButterKnife.bind(this);
-        presenter = new OrderPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
-        presenter.attachView(this);
-        initToolbar(toolbar);
-        toolbar.setTitle(getResources().getString(R.string.custom_order));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        mOrderPresenter = new OrderPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
+        mOrderPresenter.attachView(this);
+        initToolbar(mToolbar);
+        mToolbar.setTitle(getResources().getString(R.string.custom_order));
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ResponseResult();
@@ -75,18 +75,18 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         });
         initRecyclerView();
         //获取栏目列表
-        presenter.getOrderList();
+        mOrderPresenter.getOrderList();
     }
 
 
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         //分界线
         TypedArray typedArray = this.obtainStyledAttributes(new int[]{android.R.attr.listDivider});
         final Drawable divider = typedArray.getDrawable(0);
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
                 outRect.set(0, 0, 0, divider.getIntrinsicHeight());
@@ -107,34 +107,34 @@ public class OrderActivity extends BaseActivity implements IOrderView {
                 }
             }
         });
-        ItemTouchHelper helper = new ItemTouchHelper(new MyItenTouchCallback(orderAdapter, new MyItenTouchCallback.SwapCallBack() {
+        ItemTouchHelper helper = new ItemTouchHelper(new MyItenTouchCallback(mOrderAdapter, new MyItenTouchCallback.SwapCallBack() {
             @Override
             public void onSwip(int fromPosition, int toPosition) {  //数据交换位置
                 if (fromPosition < toPosition) {
                     for (int i = fromPosition; i < toPosition; i++) {
-                        Collections.swap(orderList, i, i + 1);
+                        Collections.swap(mOrderList, i, i + 1);
                     }
                 } else {
                     for (int i = fromPosition; i > toPosition; i--) {
-                        Collections.swap(orderList, i, i - 1);
+                        Collections.swap(mOrderList, i, i - 1);
                     }
                 }
-                orderAdapter.notifyItemMoved(fromPosition, toPosition);
+                mOrderAdapter.notifyItemMoved(fromPosition, toPosition);
             }
         }));
-        helper.attachToRecyclerView(recyclerView);
-        orderAdapter = new OrderAdapter(this, R.layout.item_order, orderList);
-        orderAdapter.setOnItemCheckedChanged(new OrderAdapter.SwitchChangeCallback() {
+        helper.attachToRecyclerView(mRecyclerView);
+        mOrderAdapter = new OrderAdapter(this, R.layout.item_order, mOrderList);
+        mOrderAdapter.setOnItemCheckedChanged(new OrderAdapter.SwitchChangeCallback() {
             @Override
             public void OnChange(int position, boolean isChecked) {
                 if (isChecked) {
-                    orderList.get(position).setStatus(OPENSTATUS);
+                    mOrderList.get(position).setStatus(OPENSTATUS);
                 } else {
-                    orderList.get(position).setStatus(CLOSESTATUS);
+                    mOrderList.get(position).setStatus(CLOSESTATUS);
                 }
             }
         });
-        recyclerView.setAdapter(orderAdapter);
+        mRecyclerView.setAdapter(mOrderAdapter);
 
     }
 
@@ -142,14 +142,14 @@ public class OrderActivity extends BaseActivity implements IOrderView {
     public void showView(List<Order> orders) {
         //复制一份原始list
         try {
-            originList = ListUtil.deepCopy(orders);
+            mOriginList = ListUtil.deepCopy(orders);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        LogUtils.v(originList.toString());
-        orderAdapter.addData(orders);
+        LogUtils.v(mOriginList.toString());
+        mOrderAdapter.addData(orders);
 
     }
 
@@ -161,13 +161,13 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         String themeItem[] = getResources().getStringArray(R.array.themeItem);
         for (int i = 0; i < themeItem.length; i++) {
             if (i < 4) {
-                orderList.add(new Order(themeItem[i], OPENSTATUS));
+                mOrderList.add(new Order(themeItem[i], OPENSTATUS));
             } else {
-                orderList.add(new Order(themeItem[i], CLOSESTATUS));
+                mOrderList.add(new Order(themeItem[i], CLOSESTATUS));
             }
         }
-        presenter.setOrderString(orderList);
-        orderAdapter.notifyItemRangeChanged(0, orderList.size());
+        mOrderPresenter.setOrderString(mOrderList);
+        mOrderAdapter.notifyItemRangeChanged(0, mOrderList.size());
     }
 
     @Override
@@ -186,17 +186,17 @@ public class OrderActivity extends BaseActivity implements IOrderView {
 
     @Override
     protected void onDestroy() {
-        presenter.onDetchView();
+        mOrderPresenter.onDetchView();
         mUnbinder.unbind();
         super.onDestroy();
     }
 
     private void ResponseResult() {
-        boolean isChange = compareList(originList, orderList);
-        LogUtils.v(originList + "======" + orderList);
+        boolean isChange = compareList(mOriginList, mOrderList);
+        LogUtils.v(mOriginList + "======" + mOrderList);
         if (isChange) {
-            presenter.setOrderString(orderList);
-            setResult(ORDERCHANGE, new Intent().putExtra(ORDERLIST, (Serializable) orderList));
+            mOrderPresenter.setOrderString(mOrderList);
+            setResult(ORDERCHANGE, new Intent().putExtra(ORDERLIST, (Serializable) mOrderList));
         }
         finish();
     }

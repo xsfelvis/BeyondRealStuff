@@ -1,6 +1,5 @@
 package com.xsf.realstuff.launcher.data.network.core;
 
-import com.xsf.realstuff.BuildConfig;
 import com.xsf.realstuff.launcher.common.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -22,8 +21,8 @@ public abstract class BaseOkHttpClient {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 //.cache(new Cache(FileUtils.getHttpCacheDir(mApplication), Constants.Config.HTTP_CACHE_SIZE))
                 .connectTimeout(Constants.Config.HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
-                .readTimeout(Constants.Config.HTTP_READ_TIMEOUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(loggingInterceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE));
+                .readTimeout(Constants.Config.HTTP_READ_TIMEOUT, TimeUnit.MILLISECONDS);
+                //.addInterceptor(loggingInterceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE));
         //.addInterceptor(new CacheInterceptor())
 
         builder = customize(builder);

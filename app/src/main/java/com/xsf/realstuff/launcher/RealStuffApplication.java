@@ -53,8 +53,8 @@ public class RealStuffApplication extends Application {
                 .setGlobalTag("RealStuff")
                 .setLog2FileSwitch(false)
                 //输出日志是否带边框
-                .setBorderSwitch(true)
-                .setLogFilter(LogUtils.V);
+                .setBorderSwitch(false)
+                .setLogFilter(LogUtils.D);
         if (BuildConfig.DEBUG) {
             //初始化Stetho
             Stetho.initialize(

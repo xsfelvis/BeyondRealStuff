@@ -14,4 +14,8 @@
     <string name="translateName">translate_search</string>
     <string name="search">搜索</string>
     <string name="translate_mz">translate_mz</string>
+    <string name="click_and_quit">再按一次退出程序</string>
+    <string name="my">我的</string>
+    <string name="cleancache">清除缓存成功</string>
+    <string name="nowcodeversion">当前版本号：</string>
 </resources>
