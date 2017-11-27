@@ -2,16 +2,13 @@ package com.xsf.realstuff.launcher.ui.moudle.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +17,10 @@ import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.xsf.framework.util.LogUtils;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.model.Order;
 import com.xsf.realstuff.launcher.ui.moudle.main.homepage.HomePageFragment;
@@ -39,6 +37,7 @@ import butterknife.Unbinder;
 
 import static com.xsf.realstuff.launcher.common.Constants.OPENSTATUS;
 import static com.xsf.realstuff.launcher.ui.moudle.main.order.OrderActivity.ORDERCHANGE;
+import static com.xsf.realstuff.launcher.ui.moudle.main.order.OrderActivity.ORDERLIST;
 
 /**
  * Author: xushangfei
@@ -51,31 +50,29 @@ public class MainFragment extends AbstractLazyFragment {
     public static final String TAG = "MainFragment";
 
     @BindView(R.id.tablayout)
-    TabLayout tablayout;
+    TabLayout mTablayout;
     @BindView(R.id.viewpager)
-    ViewPager viewpager;
+    ViewPager mViewpager;
     @BindView(R.id.icon_add)
-    ImageView iconAdd;
+    ImageView mIconAdd;
     @BindView(R.id.bar_layout)
-    AppBarLayout barLayout;
-    @BindView(R.id.floatButton)
-    FloatingActionButton floatButton;
+    AppBarLayout mBarLayout;
     @BindView(R.id.addlayout)
-    RelativeLayout addlayout;
+    RelativeLayout mAddlayout;
 
-    private IDataManger dataManager;
-    private List<String> tabNames;
-    private List<Fragment> fragmentList;
+    private IDataManger mDataManager;
+    private List<String> mTabNames;
+    private List<Fragment> mFragmentList;
     private Unbinder mUnbinder;
 
-    private FragmentStatePagerAdapter pagerAdapter;
+    private FragmentStatePagerAdapter mPagerAdapter;
 
     public static MainFragment newInstance() {
         return new MainFragment();
     }
 
     public MainFragment() {
-        this.dataManager = RealStuffApplication.getDadaManager();
+        this.mDataManager = RealStuffApplication.getDadaManager();
     }
 
     @Override
@@ -101,41 +98,19 @@ public class MainFragment extends AbstractLazyFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initfbc();
-        tabNames = new ArrayList<>();
-        fragmentList = new ArrayList<>();
+        mTabNames = new ArrayList<>();
+        mFragmentList = new ArrayList<>();
         //固定栏目
-        fragmentList.add(HomePageFragment.newInstance());
-        tabNames.add(getResources().getString(R.string.title1));
+        mFragmentList.add(HomePageFragment.newInstance());
+        mTabNames.add(getResources().getString(R.string.ttitle_homepage));
 
-        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         //初始化栏目数据
-        String orderString = dataManager.getOrderString();
-        if ("".equals(orderString)) {
-            viewpager.setOffscreenPageLimit(4);
-            tabNames.add(getResources().getString(R.string.title2));
-            tabNames.add(getResources().getString(R.string.title3));
-            tabNames.add(getResources().getString(R.string.title4));
-
-            fragmentList.add(CommonFragment.newInstance("Android"));
-            fragmentList.add(CommonFragment.newInstance("iOS"));
-            fragmentList.add(CommonFragment.newInstance("前端"));
-        } else {
-            Gson gson = new Gson();
-            List<Order> orders = gson.fromJson(orderString,
-                    new TypeToken<List<Order>>() {
-                    }.getType());
-            for (Order order : orders) {
-                if (order.getStatus() == OPENSTATUS) {
-                    tabNames.add(order.getTheme());
-                    fragmentList.add(CommonFragment.newInstance(order.getTheme()));
-                }
-            }
-        }
-        viewpager.setOffscreenPageLimit(fragmentList.size());
-        pagerAdapter = new ViewpagerAdapter(getChildFragmentManager());
-        viewpager.setAdapter(pagerAdapter);
-        tablayout.setupWithViewPager(viewpager);
+        initTheme();
+        mViewpager.setOffscreenPageLimit(mFragmentList.size());
+        mPagerAdapter = new ViewpagerAdapter(getChildFragmentManager());
+        mViewpager.setAdapter(mPagerAdapter);
+        mTablayout.setupWithViewPager(mViewpager);
     }
 
 
@@ -145,47 +120,22 @@ public class MainFragment extends AbstractLazyFragment {
         mUnbinder.unbind();
     }
 
-    @OnClick({R.id.icon_add, R.id.floatButton})
+    @OnClick({R.id.icon_add})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.icon_add:
                 startActivityForResult(new Intent(getActivity(), OrderActivity.class), 0);
                 break;
-            /*case R.id.floatButton:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-                    ActivityOptions options =
-                            ActivityOptions.makeSceneTransitionAnimation(getActivity(), floatButton, floatButton.getTransitionName());
-                    startActivity(new Intent(getActivity(), SearchActivity.class), options.toBundle());
-                } else {
-                    startActivity(new Intent(getActivity(), SearchActivity.class));
-                }
-                break;*/
             default:
                 break;
         }
     }
 
-    @Override
-    protected void refreshUI() {
-        TypedValue tablayoutcolor = new TypedValue();
-        TypedValue addlayoutcolor = new TypedValue();
-        TypedValue fbcolor = new TypedValue();
-        getActivity().getTheme().resolveAttribute(R.attr.tablayoutbgcolor, tablayoutcolor, true);
-        getActivity().getTheme().resolveAttribute(R.attr.addlayout, addlayoutcolor, true);
-        getActivity().getTheme().resolveAttribute(R.attr.fbcolor, fbcolor, true);
-        tablayout.setBackgroundColor(getResources().getColor(tablayoutcolor.resourceId));
-        addlayout.setBackgroundColor(getResources().getColor(addlayoutcolor.resourceId));
-        floatButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(fbcolor.resourceId)));
-        initfbc();
-    }
 
     @Override
     public void loadData() {
 
     }
-
-
 
 
     private class ViewpagerAdapter extends FragmentStatePagerAdapter {
@@ -196,12 +146,12 @@ public class MainFragment extends AbstractLazyFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return fragmentList.get(position);
+            return mFragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            return fragmentList.size();
+            return mFragmentList.size();
         }
 
         @Override
@@ -211,41 +161,63 @@ public class MainFragment extends AbstractLazyFragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return tabNames.get(position);
+            return mTabNames.get(position);
         }
 
     }
 
-    private void initfbc() {
-        if (dataManager.getTheme()) {
-            floatButton.setImageResource(R.drawable.ic_search_brone_24dp);
-        } else {
-            floatButton.setImageResource(R.drawable.ic_search_white_24dp);
-        }
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ORDERCHANGE) {
-            viewpager.setCurrentItem(0);
-            List<Order> orders = (List<Order>) data.getSerializableExtra("orderlist");
-            tabNames.clear();
-            fragmentList.clear();
-            fragmentList.add(HomePageFragment.newInstance());
-            tabNames.add(getResources().getString(R.string.title1));
-            for (Order order : orders) {
-                if (order.getStatus() == OPENSTATUS) {
-                    tabNames.add(order.getTheme());
-                    fragmentList.add(CommonFragment.newInstance(order.getTheme()));
-                }
-            }
-
-            tablayout.setupWithViewPager(viewpager);
-            pagerAdapter.notifyDataSetChanged();
-            viewpager.setOffscreenPageLimit(fragmentList.size());
+            mViewpager.setCurrentItem(0);
+            List<Order> orders = (List<Order>) data.getSerializableExtra(ORDERLIST);
+            mTabNames.clear();
+            mFragmentList.clear();
+            mFragmentList.add(HomePageFragment.newInstance());
+            mTabNames.add(getResources().getString(R.string.ttitle_homepage));
+            resetOrders(orders);
+            mTablayout.setupWithViewPager(mViewpager);
+            mPagerAdapter.notifyDataSetChanged();
+            mViewpager.setOffscreenPageLimit(mFragmentList.size());
 
         }
     }
+
+    private void resetOrders(List<Order> orders) {
+        if (orders == null || orders.isEmpty()) {
+            return;
+        }
+        for (Order order : orders) {
+            if (order.getStatus() == OPENSTATUS) {
+                mTabNames.add(order.getTheme());
+                mFragmentList.add(CommonFragment.newInstance(order.getTheme()));
+            }
+        }
+    }
+
+
+    private void initTheme() {
+        String orderString = mDataManager.getOrderString();
+        LogUtils.d(TAG, orderString);
+        if ("".equals(orderString)) {
+            mTabNames.add(getResources().getString(R.string.title_android));
+            mTabNames.add(getResources().getString(R.string.title_ios));
+            mTabNames.add(getResources().getString(R.string.title_web));
+            mFragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_android)));
+            mFragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_ios)));
+            mFragmentList.add(CommonFragment.newInstance(getResources().getString(R.string.title_web)));
+            mViewpager.setOffscreenPageLimit(mFragmentList.size());
+        } else {
+            Gson gson = new Gson();
+            List<Order> orders = gson.fromJson(orderString,
+                    new TypeToken<List<Order>>() {
+                    }.getType());
+
+            resetOrders(orders);
+        }
+    }
+
 
 }

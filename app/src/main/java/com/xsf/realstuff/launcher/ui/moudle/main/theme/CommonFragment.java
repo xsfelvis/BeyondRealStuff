@@ -6,28 +6,26 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.xsf.framework.util.ItemDecoration;
+import com.xsf.framework.util.LogUtils;
+import com.xsf.framework.util.RecyclerViewUtil;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
+import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.BaseFragment;
 import com.xsf.realstuff.launcher.common.Constants;
-import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
-import com.xsf.realstuff.launcher.common.base.BaseFragment;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.ICommonMvpPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.CommonPresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.CommonAdapter;
 import com.xsf.realstuff.launcher.ui.moudle.detail.DetailActivity;
 import com.xsf.realstuff.launcher.ui.moudle.main.theme.view.ICommonView;
-import com.xsf.realstuff.launcher.util.ItemDecoration;
-import com.xsf.realstuff.launcher.util.LogUtils;
-import com.xsf.realstuff.launcher.util.RecyclerViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +35,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 
-import static com.xsf.realstuff.launcher.util.RecyclerViewUtil.invalidateCacheItem;
-
 
 /**
  * Created by Administrator on 2017/3/29 0029.
@@ -46,16 +42,16 @@ import static com.xsf.realstuff.launcher.util.RecyclerViewUtil.invalidateCacheIt
 
 public class CommonFragment extends AbstractLazyFragment implements ICommonView {
 
-    ICommonMvpPresenter<ICommonView> commonPresenter;
-
+    public static final String BEAN = "bean";
+    private static final String THEME_ID = "theme_id";
+    ICommonMvpPresenter<ICommonView> mCommonPresenter;
     @BindView(R.id.refreshLayout)
-    TwinklingRefreshLayout refreshLayout;
+    TwinklingRefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
-    private String theme;
-    private static final String THEME_ID = "theme_id";
-    private int page = 1;
-    private List<Result> list = new ArrayList<>();
+    private String mTheme;
+    private int pageCount = 1;
+    private List<Result> mList = new ArrayList<>();
     private CommonAdapter mCommonAdapter = new CommonAdapter();
     private Unbinder mUnbinder;
 
@@ -70,22 +66,10 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        theme = getArguments().getString(THEME_ID);
-        commonPresenter = new CommonPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
+        mTheme = getArguments().getString(THEME_ID);
+        mCommonPresenter = new CommonPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
     }
 
-    @Override
-    protected void refreshUI() {
-        mRecyclerView.addItemDecoration(new ItemDecoration(getActivity(), ItemDecoration.VERTICAL_LIST));
-        int childCount = mRecyclerView.getChildCount();
-        for (int childIndex = 0; childIndex < childCount; childIndex++) {
-            TextView textView = (TextView) mRecyclerView.getChildAt(childIndex).findViewById(R.id.text);
-            TypedValue textColor = new TypedValue();
-            getActivity().getTheme().resolveAttribute(R.attr.textcolor, textColor, true);
-            textView.setTextColor(getResources().getColor(textColor.resourceId));
-        }
-        invalidateCacheItem(mRecyclerView);
-    }
 
     @Nullable
     @Override
@@ -93,7 +77,7 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
         View view = inflater.inflate(R.layout.fragment_common, container, false);
         mUnbinder = ButterKnife.bind(this, view);
         //getActivityComponent().inject(this);
-        commonPresenter.attachView(this);
+        mCommonPresenter.attachView(this);
         return view;
     }
 
@@ -106,16 +90,16 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mCommonAdapter);
-        RecyclerViewUtil.setHeader(getActivity(), refreshLayout);
-        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+        RecyclerViewUtil.setHeader(getActivity(), mRefreshLayout);
+        mRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        page = 1;
-                        list.clear();
-                        commonPresenter.loadData(theme + "/" + Constants.PAGECOUNT + "/" + page);
+                        pageCount = 1;
+                        mList.clear();
+                        mCommonPresenter.loadData(mTheme + "/" + Constants.PAGECOUNT + "/" + pageCount);
                     }
                 }, 0);
             }
@@ -126,7 +110,7 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        commonPresenter.loadData(theme + "/" + Constants.PAGECOUNT + "/" + page);
+                        mCommonPresenter.loadData(mTheme + "/" + Constants.PAGECOUNT + "/" + pageCount);
                     }
                 }, 500);
             }
@@ -136,7 +120,7 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
                 if (Constants.ERROR) {
                     Constants.ERROR = false;
                 } else {
-                    page++;
+                    pageCount++;
                 }
                 LogUtils.v("onFinishLoadMore");
                 super.onFinishLoadMore();
@@ -148,8 +132,8 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
             @Override
             public void OnItemClick(View v, int position) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
-                Result resultbean=list.get(position);
-                intent.putExtra("bean", resultbean);
+                Result resultbean = mList.get(position);
+                intent.putExtra(BEAN, resultbean);
                 startActivity(intent);
             }
         });
@@ -157,10 +141,6 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
 
     }
 
-    @Override
-    public void loadData() {
-        refreshLayout.startRefresh();
-    }
 
     @Override
     public void onDestroyView() {
@@ -171,22 +151,27 @@ public class CommonFragment extends AbstractLazyFragment implements ICommonView 
     @Override
     public void onDetach() {
         super.onDetach();
-        commonPresenter.onDetchView();
+        mCommonPresenter.onDetchView();
     }
+
+    @Override
+    public void loadData() {
+        mRefreshLayout.startRefresh();
+    }
+
 
     @Override
     public void showError() {
         Constants.ERROR = true;
-        refreshLayout.finishLoadmore();
+        mRefreshLayout.finishLoadmore();
     }
 
     @Override
     public void showList(List<Result> resultList) {
-
-        int startPosition = list.size();
-        list.addAll(resultList);
-        RecyclerViewUtil.loadMoreSetting(refreshLayout, list);
-        mCommonAdapter.setData(list);
-        mCommonAdapter.notifyData(startPosition, list.size());
+        int startPosition = mList.size();
+        mList.addAll(resultList);
+        RecyclerViewUtil.loadMoreSetting(mRefreshLayout, mList);
+        mCommonAdapter.setData(mList);
+        mCommonAdapter.notifyData(startPosition, mList.size());
     }
 }

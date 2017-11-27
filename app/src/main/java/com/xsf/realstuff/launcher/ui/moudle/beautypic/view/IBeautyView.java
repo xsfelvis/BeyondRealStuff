@@ -1,7 +1,7 @@
 package com.xsf.realstuff.launcher.ui.moudle.beautypic.view;
 
 import com.xsf.realstuff.launcher.data.network.response.Result;
-import com.xsf.realstuff.launcher.common.base.MvpView;
+import com.xsf.framework.base.presenter.MvpView;
 
 import java.util.List;
 

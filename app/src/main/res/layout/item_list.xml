@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:textSize="10sp"
-        android:textColor="@color/textlistbg"/>
+        android:textColor="@color/link_light"/>
     <ImageView
         android:id="@+id/image"
         android:layout_width="70dp"

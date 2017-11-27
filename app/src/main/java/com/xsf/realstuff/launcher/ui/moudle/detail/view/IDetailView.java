@@ -1,7 +1,7 @@
 package com.xsf.realstuff.launcher.ui.moudle.detail.view;
 
 
-import com.xsf.realstuff.launcher.common.base.MvpView;
+import com.xsf.framework.base.presenter.MvpView;
 
 /**
  * Created by Administrator on 2017/4/14 0014.

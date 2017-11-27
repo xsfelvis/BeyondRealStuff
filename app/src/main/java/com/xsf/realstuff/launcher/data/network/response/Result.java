@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Result implements Parcelable {
     /**
-     * _id : 58d4e454421aa93abd1fd15a
+     * id : 58d4e454421aa93abd1fd15a
      * createdAt : 2017-03-24T17:18:12.745Z
      * desc : RecyclerView侧滑菜单
      * images : ["http://img.gank.io/99a9d510-195d-4d50-a310-13b098c0c776"]
@@ -30,7 +30,7 @@ public class Result implements Parcelable {
      * who : pss
      */
 
-    private String id;
+    private String _id;
     private String ganhuo_id;
     private String createdAt;
     private String desc;
@@ -42,7 +42,6 @@ public class Result implements Parcelable {
     private String who;
     @Transient
     private List<String> images;
-
     private List<Image> img;
 
 
@@ -52,11 +51,11 @@ public class Result implements Parcelable {
     }
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this._id = id;
     }
 
     public String getCreatedAt() {
@@ -156,7 +155,7 @@ public class Result implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
+        dest.writeString(this._id);
         dest.writeString(this.ganhuo_id);
         dest.writeString(this.createdAt);
         dest.writeString(this.desc);
@@ -171,7 +170,7 @@ public class Result implements Parcelable {
     }
 
     protected Result(Parcel in) {
-        this.id = in.readString();
+        this._id = in.readString();
         this.ganhuo_id = in.readString();
         this.createdAt = in.readString();
         this.desc = in.readString();

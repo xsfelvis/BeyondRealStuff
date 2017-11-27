@@ -3,6 +3,7 @@ package com.xsf.realstuff.launcher.data.preference;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.xsf.framework.base.data.ISharePreferenceHelper;
 import com.xsf.realstuff.launcher.RealStuffApplication;
 import com.xsf.realstuff.launcher.common.Constants;
 

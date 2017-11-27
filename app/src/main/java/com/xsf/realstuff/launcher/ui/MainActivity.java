@@ -10,18 +10,25 @@ import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.xsf.framework.util.FrameWorkActivityManager;
 import com.xsf.realstuff.R;
-import com.xsf.realstuff.launcher.common.base.BaseActivity;
-import com.xsf.realstuff.launcher.common.base.BaseFragment;
+import com.xsf.realstuff.launcher.common.BaseActivity;
+import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
+import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
+import com.xsf.realstuff.launcher.ui.moudle.setting.SettingFragment;
 import com.xsf.realstuff.launcher.ui.widget.NavigationItemView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageBottomTabLayout;
 import me.majiajie.pagerbottomtabstrip.item.BaseTabItem;
+
+import static com.xsf.realstuff.launcher.common.Constants.Config.INTERVAL_TIME;
 
 
 public class MainActivity extends BaseActivity {
@@ -34,18 +41,14 @@ public class MainActivity extends BaseActivity {
     PageBottomTabLayout mTab;
     @BindView(R.id.viewpager)
     ViewPager mViewpager;
-
+    Unbinder mUnbinder;
     private List<Fragment> mFragmentList = new ArrayList<>();
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mUnbinder = ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
 
         NavigationController navigationController = mTab.custom()
@@ -53,9 +56,9 @@ public class MainActivity extends BaseActivity {
                 .addItem(newItem(R.mipmap.tab_fuli_normal, R.mipmap.tab_fuli_selected))
                 .addItem(newItem(R.mipmap.tab_profile_normal, R.mipmap.tab_profile_selected))
                 .build();
-        mFragmentList.add(BaseFragment.newInstance(0));
-        mFragmentList.add(BaseFragment.newInstance(1));
-        mFragmentList.add(BaseFragment.newInstance(2));
+        mFragmentList.add(MainFragment.newInstance());
+        mFragmentList.add(BeautyPicFragment.newInstance());
+        mFragmentList.add(SettingFragment.newInstance());
         mViewpager.setOffscreenPageLimit(mFragmentList.size());
         PagerAdapter pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -73,17 +76,23 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        mUnbinder.unbind();
+        super.onDestroy();
+    }
+
     private long exitTime = 0;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            if ((System.currentTimeMillis() - exitTime) > INTERVAL_TIME) {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.click_and_quit), Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
-                //  System.exit(0);
+                FrameWorkActivityManager.getInstance().removeActivity(this);
             }
             return true;
         }
@@ -95,12 +104,6 @@ public class MainActivity extends BaseActivity {
         NavigationItemView navigationItemView = new NavigationItemView(MainActivity.this);
         navigationItemView.initialize(drawble, drawbleSelect);
         return navigationItemView;
-    }
-
-
-    @Override
-    protected void refreshUI() {
-
     }
 
 

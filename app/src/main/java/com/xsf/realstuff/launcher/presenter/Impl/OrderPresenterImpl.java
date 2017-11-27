@@ -2,7 +2,7 @@ package com.xsf.realstuff.launcher.presenter.Impl;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.xsf.realstuff.launcher.common.base.BasePresenter;
+import com.xsf.realstuff.launcher.common.BasePresenter;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.model.Order;
 import com.xsf.realstuff.launcher.presenter.IOrderMvpPresenter;

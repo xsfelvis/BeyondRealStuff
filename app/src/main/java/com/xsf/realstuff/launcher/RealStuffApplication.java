@@ -4,23 +4,15 @@ import android.app.Application;
 import android.content.Context;
 
 import com.facebook.stetho.Stetho;
-import com.google.gson.Gson;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.squareup.leakcanary.LeakCanary;
+import com.xsf.framework.util.LogUtils;
 import com.xsf.realstuff.BuildConfig;
-import com.xsf.realstuff.launcher.common.Constants;
 import com.xsf.realstuff.launcher.data.AppDataManager;
 import com.xsf.realstuff.launcher.data.IDataManger;
-import com.xsf.realstuff.launcher.util.LogUtils;
+import com.xsf.realstuff.launcher.data.network.RealStuffHttpClient;
+import com.xsf.realstuff.launcher.data.network.RealStuffRetrofit;
 
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.xsf.realstuff.launcher.common.Constants.baseUrl;
 
 /**
  * Author: xushangfei
@@ -39,7 +31,7 @@ public class RealStuffApplication extends Application {
     /**
      * 网络相关
      */
-    private static Retrofit mRetrofit;
+    private static Retrofit mGankIoRetrofit;
 
 
     private static IDataManger mDataManger;
@@ -61,8 +53,8 @@ public class RealStuffApplication extends Application {
                 .setGlobalTag("RealStuff")
                 .setLog2FileSwitch(false)
                 //输出日志是否带边框
-                .setBorderSwitch(true)
-                .setLogFilter(LogUtils.V);
+                .setBorderSwitch(false)
+                .setLogFilter(LogUtils.D);
         if (BuildConfig.DEBUG) {
             //初始化Stetho
             Stetho.initialize(
@@ -81,26 +73,9 @@ public class RealStuffApplication extends Application {
             LeakCanary.install(this);
         }
 
-        //初始化网络
-        Gson gson = new Gson();
-        GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        //初始化gankIo网络
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                //.cache(new Cache(FileUtils.getHttpCacheDir(mApplication), Constants.Config.HTTP_CACHE_SIZE))
-                .connectTimeout(Constants.Config.HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
-                .readTimeout(Constants.Config.HTTP_READ_TIMEOUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(loggingInterceptor)
-                //.addInterceptor(new CacheInterceptor())
-
-                .build();
-
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(client)
-                .addConverterFactory(gsonConverterFactory)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
+        mGankIoRetrofit = new RealStuffRetrofit(new RealStuffHttpClient()).get();
 
         //初始化数据管理
         mDataManger = AppDataManager.getInstance();
@@ -112,8 +87,8 @@ public class RealStuffApplication extends Application {
         return mContext;
     }
 
-    public static Retrofit getRetrofit() {
-        return mRetrofit;
+    public static Retrofit getGankIoRetrofit() {
+        return mGankIoRetrofit;
     }
 
     public static IDataManger getDadaManager() {

@@ -19,16 +19,16 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
 import com.xsf.realstuff.launcher.common.Constants;
-import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
-import com.xsf.realstuff.launcher.common.base.BaseEnum;
+import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.BaseEnum;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.Impl.BeautyPagePresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.BeautyPicAdapter;
 import com.xsf.realstuff.launcher.ui.adapter.base.MultiItemTypeAdapter;
 import com.xsf.realstuff.launcher.ui.moudle.beautypic.view.IBeautyView;
 import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
-import com.xsf.realstuff.launcher.util.LogUtils;
-import com.xsf.realstuff.launcher.util.RecyclerViewUtil;
+import com.xsf.framework.util.LogUtils;
+import com.xsf.framework.util.RecyclerViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +82,7 @@ public class BeautyPicFragment extends AbstractLazyFragment implements IBeautyVi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mToolbar.setTitle(R.string.main2);
+        mToolbar.setTitle(R.string.title_welfare);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvMz.setLayoutManager(staggeredGridLayoutManager);
         mBeautyPicAdapter = new BeautyPicAdapter(getActivity(), R.layout.item_mz, list);
@@ -160,11 +160,6 @@ public class BeautyPicFragment extends AbstractLazyFragment implements IBeautyVi
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
-    }
-
-    @Override
-    protected void refreshUI() {
-        refreshToolbar(mToolbar);
     }
 
     @Override

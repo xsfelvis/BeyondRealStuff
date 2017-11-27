@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.haozhang.lib.SlantedTextView;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.data.network.response.Result;
-import com.xsf.realstuff.launcher.util.DensityUtil;
-import com.xsf.realstuff.launcher.util.image.ImageLoaderManager;
+import com.xsf.framework.util.DensityUtil;
+import com.xsf.framework.util.image.ImageLoaderManager;
 
 import java.util.List;
 
@@ -27,6 +27,11 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
     public static final int FIRST_STICKY_VIEW = 1;
     public static final int HAS_STICKY_VIEW = 2;
     public static final int NONE_STICKY_VIEW = 3;
+    public static final String UNKNOWAUTHOR = "无名氏";
+    public static final String ANDROID = "Android";
+    public static final String WEB = "前端";
+    public static final String IOS = "iOS";
+    public static final String MORERESOURCE = "拓展资源";
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,14 +44,14 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, final int position) {
         ViewHolder recyclerViewHolder = holder;
         recyclerViewHolder.tvTitle.setText(mList.get(position).getDesc());
-        recyclerViewHolder.anthor.setText(mList.get(position).getWho());
+        recyclerViewHolder.anthor.setText(TextUtils.isEmpty(mList.get(position).getWho()) ? UNKNOWAUTHOR : mList.get(position).getWho());
 
         if (mList.get(position).getImages() != null && mList.get(position).getImages().size() > 0) {
             recyclerViewHolder.ivIndex.setVisibility(View.VISIBLE);
 
-            ImageLoaderManager.getImageLoader().displayImage(recyclerViewHolder.itemView.getContext(),mList.get(position).getImages().get(0) + "?imageView2/0/w/"
+            ImageLoaderManager.getImageLoader().displayImage(recyclerViewHolder.itemView.getContext(), mList.get(position).getImages().get(0) + "?imageView2/0/w/"
                     + DensityUtil.getScreenWidth(recyclerViewHolder.itemView.getContext()) + "/"
-                    + "h/" + DensityUtil.dip2px(recyclerViewHolder.itemView.getContext(),200),recyclerViewHolder.ivIndex);
+                    + "h/" + DensityUtil.dip2px(recyclerViewHolder.itemView.getContext(), 200), recyclerViewHolder.ivIndex);
 
         } else {
             recyclerViewHolder.ivIndex.setVisibility(View.GONE);
@@ -74,18 +79,18 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
         //右上角标签
         recyclerViewHolder.slante.setText(mList.get(position).getType());
         switch (mList.get(position).getType()) {
-            case "Android":
+            case ANDROID:
                 recyclerViewHolder.slante.setSlantedBackgroundColor
                         (recyclerViewHolder.itemView.getContext().getResources().getColor(R.color.darkred));
                 break;
-            case "iOS":
+            case IOS:
                 recyclerViewHolder.slante.setSlantedBackgroundColor
                         (recyclerViewHolder.itemView.getContext().getResources().getColor(R.color.tomato));
                 break;
-            case "前端":
+            case WEB:
                 recyclerViewHolder.slante.setSlantedBackgroundColor
                         (recyclerViewHolder.itemView.getContext().getResources().getColor(R.color.tan));
-            case "拓展资源":
+            case MORERESOURCE:
                 recyclerViewHolder.slante.setSlantedBackgroundColor
                         (recyclerViewHolder.itemView.getContext().getResources().getColor(R.color.darkgoldenrod));
                 break;

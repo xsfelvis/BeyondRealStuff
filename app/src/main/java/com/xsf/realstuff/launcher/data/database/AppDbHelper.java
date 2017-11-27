@@ -1,5 +1,7 @@
 package com.xsf.realstuff.launcher.data.database;
 
+import com.xsf.framework.base.data.IDbHelper;
+
 /**
  * Author: xushangfei
  * Time: created at 2017/11/8.

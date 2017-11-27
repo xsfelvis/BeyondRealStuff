@@ -26,14 +26,15 @@ import android.widget.ScrollView;
 
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.base.BaseActivity;
+import com.xsf.realstuff.launcher.common.BaseActivity;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IDetailMVPPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.DetailPresenterImpl;
 import com.xsf.realstuff.launcher.ui.moudle.detail.view.IDetailView;
+import com.xsf.realstuff.launcher.ui.moudle.main.theme.CommonFragment;
 import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
-import com.xsf.realstuff.launcher.util.DensityUtil;
-import com.xsf.realstuff.launcher.util.image.ImageLoaderManager;
+import com.xsf.framework.util.DensityUtil;
+import com.xsf.framework.util.image.ImageLoaderManager;
 
 import java.lang.reflect.Field;
 
@@ -88,18 +89,13 @@ public class DetailActivity extends BaseActivity implements IDetailView {
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_detail;
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_detail);
         mUnbinder = ButterKnife.bind(this);
         mPresenter = new DetailPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
         mPresenter.attachView(this);
-        result = getIntent().getParcelableExtra("bean");
+        result = getIntent().getParcelableExtra(CommonFragment.BEAN);
         webUrl = result.getUrl();
         detailId = result.getGanhuo_id() == null ? result.getId() : result.getGanhuo_id();
         result.setId(detailId);
@@ -107,11 +103,6 @@ public class DetailActivity extends BaseActivity implements IDetailView {
         initWebview();
         initListener();
         mPresenter.queryIsLike(detailId);
-    }
-
-    @Override
-    protected void refreshUI() {
-
     }
 
 
