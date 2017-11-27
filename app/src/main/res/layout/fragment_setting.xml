@@ -37,14 +37,14 @@
     </LinearLayout>
     <!--
         <View
-            android:id="@+id/line1"
+            andr_idd:id_id@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginLeft="50dp"
             android:background="?attr/bottomline"></View>
 
        <LinearLayout
-            android:id="@+id/ll_collection"
+            andr_idd:id_id@+id/ll_collection"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:foreground="?android:attr/selectableItemBackground"
@@ -60,7 +60,7 @@
                 />
 
             <TextView
-                android:id="@+id/tv_collection"
+                andr_idd:id_id@+id/tv_collection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -71,7 +71,7 @@
         </LinearLayout>
 
     <View
-        android:id="@+id/line2"
+        andr_idd:id_id@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="50dp"
@@ -93,7 +93,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_night"
+            andr_idd:id_id@+id/tv_night"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -103,7 +103,7 @@
             />
 
         <android.support.v7.widget.SwitchCompat
-            android:id="@+id/switchCompat"
+            andr_idd:id_id@+id/switchCompat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"

@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.base.AbstractLazyFragment;
+import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.data.IDataManger;
-import com.xsf.realstuff.launcher.util.DataCleanManager;
+import com.xsf.framework.util.DataCleanManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,15 +27,15 @@ import butterknife.Unbinder;
 public class SettingFragment extends AbstractLazyFragment {
 
 
-    IDataManger dataManager;
+    IDataManger mDataManager;
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @BindView(R.id.tv_clean)
-    TextView tvClean;
+    TextView mTvClean;
     @BindView(R.id.line3)
-    View line3;
+    View mLine3;
     @BindView(R.id.ll_clean)
-    LinearLayout llClean;
+    LinearLayout mLlClean;
     @BindView(R.id.tv_about_app)
     TextView mTvAboutApp;
     private Unbinder mUnbinder;
@@ -46,7 +46,7 @@ public class SettingFragment extends AbstractLazyFragment {
     }
 
     public SettingFragment() {
-        dataManager = RealStuffApplication.getDadaManager();
+        mDataManager = RealStuffApplication.getDadaManager();
     }
 
     @Override
@@ -69,20 +69,20 @@ public class SettingFragment extends AbstractLazyFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar.setTitle("我的");
+        mToolbar.setTitle(getResources().getString(R.string.my));
         //清除缓存
-        llClean.setOnClickListener(new View.OnClickListener() {
+        mLlClean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DataCleanManager.cleanApplicationData(getActivity(), new String[0]);
-                Snackbar.make(llClean, "清除缓存成功", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(mLlClean, getResources().getString(R.string.cleancache), Snackbar.LENGTH_SHORT).show();
             }
         });
         try {
             PackageManager manager = RealStuffApplication.getAppContext().getPackageManager();
             PackageInfo info = manager.getPackageInfo(RealStuffApplication.getAppContext().getPackageName(), 0);
             String version = info.versionName;
-            mTvAboutApp.setText("当前版本号："+version);
+            mTvAboutApp.setText(getResources().getString(R.string.nowcodeversion) + version);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,8 +102,9 @@ public class SettingFragment extends AbstractLazyFragment {
     }
 
     @Override
-    protected void refreshUI() {
-
+    public void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
     }
 
     @Override

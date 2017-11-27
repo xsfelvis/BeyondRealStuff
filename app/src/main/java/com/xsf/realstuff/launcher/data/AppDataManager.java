@@ -1,12 +1,12 @@
 package com.xsf.realstuff.launcher.data;
 
 import com.xsf.realstuff.launcher.data.database.AppDbHelper;
-import com.xsf.realstuff.launcher.data.database.IDbHelper;
+import com.xsf.framework.base.data.IDbHelper;
 import com.xsf.realstuff.launcher.data.network.AppApiHelper;
 import com.xsf.realstuff.launcher.data.network.IApiHelper;
 import com.xsf.realstuff.launcher.data.network.response.ThemeResponse;
 import com.xsf.realstuff.launcher.data.preference.AppSharePreferences;
-import com.xsf.realstuff.launcher.data.preference.ISharePreferenceHelper;
+import com.xsf.framework.base.data.ISharePreferenceHelper;
 
 import io.reactivex.Observable;
 

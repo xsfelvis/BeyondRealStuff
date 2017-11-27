@@ -27,7 +27,7 @@
                 android:layout_toLeftOf="@+id/icon_add"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:tabTextColor="@color/textbg"
+                app:tabTextColor="@color/night_background"
                 app:tabSelectedTextColor="@color/white"
                 app:tabTextAppearance="@style/TabLayoutTextStyle"
                 app:tabIndicatorColor="@color/white"
@@ -43,8 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v4.view.ViewPager>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatButton"
+   <!-- <android.support.design.widget.FloatingActionButton
+        andr_idd:id_id@+id/floatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -53,6 +53,5 @@
         android:transitionName="@string/translateName"
         app:backgroundTint="?attr/fbcolor"
         app:srcCompat="@drawable/ic_search_white_24dp"
-
-        />
+        />-->
 </RelativeLayout>

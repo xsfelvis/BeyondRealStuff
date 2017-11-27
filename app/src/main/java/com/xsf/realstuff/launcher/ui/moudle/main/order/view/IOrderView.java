@@ -1,6 +1,6 @@
 package com.xsf.realstuff.launcher.ui.moudle.main.order.view;
 
-import com.xsf.realstuff.launcher.common.base.MvpView;
+import com.xsf.framework.base.presenter.MvpView;
 import com.xsf.realstuff.launcher.data.model.Order;
 
 import java.util.List;

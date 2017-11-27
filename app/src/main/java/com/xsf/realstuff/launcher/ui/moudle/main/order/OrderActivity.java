@@ -10,19 +10,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.KeyEvent;
 import android.view.View;
 
+import com.xsf.framework.util.ListUtil;
+import com.xsf.framework.util.LogUtils;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.RealStuffApplication;
-import com.xsf.realstuff.launcher.common.base.BaseActivity;
+import com.xsf.realstuff.launcher.common.BaseActivity;
 import com.xsf.realstuff.launcher.data.model.Order;
 import com.xsf.realstuff.launcher.presenter.IOrderMvpPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.OrderPresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.MyItenTouchCallback;
 import com.xsf.realstuff.launcher.ui.adapter.OrderAdapter;
 import com.xsf.realstuff.launcher.ui.moudle.main.order.view.IOrderView;
-import com.xsf.realstuff.launcher.util.ListUtil;
-import com.xsf.realstuff.launcher.util.LogUtils;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -31,6 +32,8 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 
 import static com.xsf.realstuff.launcher.common.Constants.CLOSESTATUS;
@@ -42,62 +45,48 @@ import static com.xsf.realstuff.launcher.common.Constants.OPENSTATUS;
  */
 
 public class OrderActivity extends BaseActivity implements IOrderView {
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-
-
-    private List<Order> orderList = new ArrayList<>();
-    private List<Order> originList;
-    private OrderAdapter orderAdapter;
-
+    public static final String ORDERLIST = "orderlist";
     public static final int ORDERCHANGE = 100;
 
-    IOrderMvpPresenter<IOrderView> presenter;
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_order;
-    }
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+    private List<Order> mOrderList = new ArrayList<>();
+    private List<Order> mOriginList;
+    private OrderAdapter mOrderAdapter;
+    IOrderMvpPresenter<IOrderView> mOrderPresenter;
+    Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new OrderPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
-        presenter.attachView(this);
-        initToolbar(toolbar);
-        toolbar.setTitle("拖拽可排序");
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_order);
+        mUnbinder = ButterKnife.bind(this);
+        mOrderPresenter = new OrderPresenterImpl<>(RealStuffApplication.getDadaManager(), new CompositeDisposable());
+        mOrderPresenter.attachView(this);
+        initToolbar(mToolbar);
+        mToolbar.setTitle(getResources().getString(R.string.custom_order));
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isChange = compareList(originList, orderList);
-                LogUtils.v(originList + "======" + orderList);
-                if (isChange) {
-                    presenter.setOrderString(orderList);
-                    setResult(ORDERCHANGE, new Intent().putExtra("orderlist", (Serializable) orderList));
-                }
-                finish();
+                ResponseResult();
             }
         });
         initRecyclerView();
         //获取栏目列表
-        presenter.getOrderList();
+        mOrderPresenter.getOrderList();
     }
 
-    @Override
-    protected void refreshUI() {
-
-    }
 
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         //分界线
         TypedArray typedArray = this.obtainStyledAttributes(new int[]{android.R.attr.listDivider});
         final Drawable divider = typedArray.getDrawable(0);
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
                 outRect.set(0, 0, 0, divider.getIntrinsicHeight());
@@ -118,34 +107,34 @@ public class OrderActivity extends BaseActivity implements IOrderView {
                 }
             }
         });
-        ItemTouchHelper helper = new ItemTouchHelper(new MyItenTouchCallback(orderAdapter, new MyItenTouchCallback.SwapCallBack() {
+        ItemTouchHelper helper = new ItemTouchHelper(new MyItenTouchCallback(mOrderAdapter, new MyItenTouchCallback.SwapCallBack() {
             @Override
             public void onSwip(int fromPosition, int toPosition) {  //数据交换位置
                 if (fromPosition < toPosition) {
                     for (int i = fromPosition; i < toPosition; i++) {
-                        Collections.swap(orderList, i, i + 1);
+                        Collections.swap(mOrderList, i, i + 1);
                     }
                 } else {
                     for (int i = fromPosition; i > toPosition; i--) {
-                        Collections.swap(orderList, i, i - 1);
+                        Collections.swap(mOrderList, i, i - 1);
                     }
                 }
-                orderAdapter.notifyItemMoved(fromPosition, toPosition);
+                mOrderAdapter.notifyItemMoved(fromPosition, toPosition);
             }
         }));
-        helper.attachToRecyclerView(recyclerView);
-        orderAdapter = new OrderAdapter(this, R.layout.item_order, orderList);
-        orderAdapter.setOnItemCheckedChanged(new OrderAdapter.SwitchChangeCallback() {
+        helper.attachToRecyclerView(mRecyclerView);
+        mOrderAdapter = new OrderAdapter(this, R.layout.item_order, mOrderList);
+        mOrderAdapter.setOnItemCheckedChanged(new OrderAdapter.SwitchChangeCallback() {
             @Override
             public void OnChange(int position, boolean isChecked) {
                 if (isChecked) {
-                    orderList.get(position).setStatus(OPENSTATUS);
+                    mOrderList.get(position).setStatus(OPENSTATUS);
                 } else {
-                    orderList.get(position).setStatus(CLOSESTATUS);
+                    mOrderList.get(position).setStatus(CLOSESTATUS);
                 }
             }
         });
-        recyclerView.setAdapter(orderAdapter);
+        mRecyclerView.setAdapter(mOrderAdapter);
 
     }
 
@@ -153,14 +142,14 @@ public class OrderActivity extends BaseActivity implements IOrderView {
     public void showView(List<Order> orders) {
         //复制一份原始list
         try {
-            originList = ListUtil.deepCopy(orders);
+            mOriginList = ListUtil.deepCopy(orders);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        LogUtils.v(originList.toString());
-        orderAdapter.addData(orders);
+        LogUtils.v(mOriginList.toString());
+        mOrderAdapter.addData(orders);
 
     }
 
@@ -172,18 +161,44 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         String themeItem[] = getResources().getStringArray(R.array.themeItem);
         for (int i = 0; i < themeItem.length; i++) {
             if (i < 4) {
-                orderList.add(new Order(themeItem[i], OPENSTATUS));
+                mOrderList.add(new Order(themeItem[i], OPENSTATUS));
             } else {
-                orderList.add(new Order(themeItem[i], CLOSESTATUS));
+                mOrderList.add(new Order(themeItem[i], CLOSESTATUS));
             }
         }
-        presenter.setOrderString(orderList);
-        orderAdapter.notifyItemRangeChanged(0, orderList.size());
+        mOrderPresenter.setOrderString(mOrderList);
+        mOrderAdapter.notifyItemRangeChanged(0, mOrderList.size());
     }
 
     @Override
     public void showError() {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            ResponseResult();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        mOrderPresenter.onDetchView();
+        mUnbinder.unbind();
+        super.onDestroy();
+    }
+
+    private void ResponseResult() {
+        boolean isChange = compareList(mOriginList, mOrderList);
+        LogUtils.v(mOriginList + "======" + mOrderList);
+        if (isChange) {
+            mOrderPresenter.setOrderString(mOrderList);
+            setResult(ORDERCHANGE, new Intent().putExtra(ORDERLIST, (Serializable) mOrderList));
+        }
+        finish();
     }
 
     private boolean compareList(List<Order> list1, List<Order> list2) {
@@ -202,12 +217,5 @@ public class OrderActivity extends BaseActivity implements IOrderView {
         }
         return false;
     }
-
-    @Override
-    protected void onDestroy() {
-        presenter.onDetchView();
-        super.onDestroy();
-    }
-
 
 }
