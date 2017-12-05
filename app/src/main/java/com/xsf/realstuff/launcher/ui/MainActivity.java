@@ -13,9 +13,9 @@ import android.widget.Toast;
 import com.xsf.framework.util.FrameWorkActivityManager;
 import com.xsf.realstuff.R;
 import com.xsf.realstuff.launcher.common.BaseActivity;
-import com.xsf.realstuff.launcher.ui.moudle.beautypic.BeautyPicFragment;
-import com.xsf.realstuff.launcher.ui.moudle.main.MainFragment;
-import com.xsf.realstuff.launcher.ui.moudle.setting.SettingFragment;
+import com.xsf.realstuff.launcher.ui.module.beautypic.BeautyPicFragment;
+import com.xsf.realstuff.launcher.ui.module.main.MainFragment;
+import com.xsf.realstuff.launcher.ui.module.setting.SettingFragment;
 import com.xsf.realstuff.launcher.ui.widget.NavigationItemView;
 
 import java.util.ArrayList;

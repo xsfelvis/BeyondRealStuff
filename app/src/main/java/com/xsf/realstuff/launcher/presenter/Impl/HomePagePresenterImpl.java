@@ -5,7 +5,7 @@ import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.data.network.response.ThemeResponse;
 import com.xsf.realstuff.launcher.presenter.IHomePagePresenter;
 import com.xsf.realstuff.launcher.common.BasePresenter;
-import com.xsf.realstuff.launcher.ui.moudle.main.homepage.view.IHomePageView;
+import com.xsf.realstuff.launcher.ui.module.main.homepage.view.IHomePageView;
 import com.xsf.framework.util.LogUtils;
 
 import java.io.UnsupportedEncodingException;

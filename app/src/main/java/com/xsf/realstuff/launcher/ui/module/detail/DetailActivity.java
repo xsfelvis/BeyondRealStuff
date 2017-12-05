@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.detail;
+package com.xsf.realstuff.launcher.ui.module.detail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,9 +30,9 @@ import com.xsf.realstuff.launcher.common.BaseActivity;
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IDetailMVPPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.DetailPresenterImpl;
-import com.xsf.realstuff.launcher.ui.moudle.detail.view.IDetailView;
-import com.xsf.realstuff.launcher.ui.moudle.main.theme.CommonFragment;
-import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
+import com.xsf.realstuff.launcher.ui.module.detail.view.IDetailView;
+import com.xsf.realstuff.launcher.ui.module.main.theme.CommonFragment;
+import com.xsf.realstuff.launcher.ui.module.picdetail.PicDetailActivity;
 import com.xsf.framework.util.DensityUtil;
 import com.xsf.framework.util.image.ImageLoaderManager;
 

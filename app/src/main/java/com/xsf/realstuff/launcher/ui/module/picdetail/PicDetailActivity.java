@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.picdetail;
+package com.xsf.realstuff.launcher.ui.module.picdetail;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;

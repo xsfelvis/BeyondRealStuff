@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.main;
+package com.xsf.realstuff.launcher.ui.module.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,9 +23,9 @@ import com.xsf.realstuff.launcher.RealStuffApplication;
 import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.model.Order;
-import com.xsf.realstuff.launcher.ui.moudle.main.homepage.HomePageFragment;
-import com.xsf.realstuff.launcher.ui.moudle.main.order.OrderActivity;
-import com.xsf.realstuff.launcher.ui.moudle.main.theme.CommonFragment;
+import com.xsf.realstuff.launcher.ui.module.main.homepage.HomePageFragment;
+import com.xsf.realstuff.launcher.ui.module.main.order.OrderActivity;
+import com.xsf.realstuff.launcher.ui.module.main.theme.CommonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +36,8 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static com.xsf.realstuff.launcher.common.Constants.OPENSTATUS;
-import static com.xsf.realstuff.launcher.ui.moudle.main.order.OrderActivity.ORDERCHANGE;
-import static com.xsf.realstuff.launcher.ui.moudle.main.order.OrderActivity.ORDERLIST;
+import static com.xsf.realstuff.launcher.ui.module.main.order.OrderActivity.ORDERCHANGE;
+import static com.xsf.realstuff.launcher.ui.module.main.order.OrderActivity.ORDERLIST;
 
 /**
  * Author: xushangfei

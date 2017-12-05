@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.main.order;
+package com.xsf.realstuff.launcher.ui.module.main.order;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -23,7 +23,7 @@ import com.xsf.realstuff.launcher.presenter.IOrderMvpPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.OrderPresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.MyItenTouchCallback;
 import com.xsf.realstuff.launcher.ui.adapter.OrderAdapter;
-import com.xsf.realstuff.launcher.ui.moudle.main.order.view.IOrderView;
+import com.xsf.realstuff.launcher.ui.module.main.order.view.IOrderView;
 
 import java.io.IOException;
 import java.io.Serializable;

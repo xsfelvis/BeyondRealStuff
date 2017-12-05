@@ -5,7 +5,7 @@ import com.xsf.realstuff.launcher.common.BasePresenter;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.network.response.ThemeResponse;
 import com.xsf.realstuff.launcher.presenter.ICommonMvpPresenter;
-import com.xsf.realstuff.launcher.ui.moudle.main.theme.view.ICommonView;
+import com.xsf.realstuff.launcher.ui.module.main.theme.view.ICommonView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

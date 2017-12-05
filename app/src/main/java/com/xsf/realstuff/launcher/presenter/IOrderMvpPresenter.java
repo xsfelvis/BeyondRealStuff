@@ -3,7 +3,7 @@ package com.xsf.realstuff.launcher.presenter;
 
 import com.xsf.framework.base.presenter.MvpPresenter;
 import com.xsf.realstuff.launcher.data.model.Order;
-import com.xsf.realstuff.launcher.ui.moudle.main.order.view.IOrderView;
+import com.xsf.realstuff.launcher.ui.module.main.order.view.IOrderView;
 
 import java.util.List;
 

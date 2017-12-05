@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.main.theme;
+package com.xsf.realstuff.launcher.ui.module.main.theme;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,8 +24,8 @@ import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.ICommonMvpPresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.CommonPresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.CommonAdapter;
-import com.xsf.realstuff.launcher.ui.moudle.detail.DetailActivity;
-import com.xsf.realstuff.launcher.ui.moudle.main.theme.view.ICommonView;
+import com.xsf.realstuff.launcher.ui.module.detail.DetailActivity;
+import com.xsf.realstuff.launcher.ui.module.main.theme.view.ICommonView;
 
 import java.util.ArrayList;
 import java.util.List;

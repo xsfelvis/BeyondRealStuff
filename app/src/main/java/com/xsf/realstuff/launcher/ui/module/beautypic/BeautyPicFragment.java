@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.beautypic;
+package com.xsf.realstuff.launcher.ui.module.beautypic;
 
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -25,8 +25,8 @@ import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.Impl.BeautyPagePresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.BeautyPicAdapter;
 import com.xsf.realstuff.launcher.ui.adapter.base.MultiItemTypeAdapter;
-import com.xsf.realstuff.launcher.ui.moudle.beautypic.view.IBeautyView;
-import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
+import com.xsf.realstuff.launcher.ui.module.beautypic.view.IBeautyView;
+import com.xsf.realstuff.launcher.ui.module.picdetail.PicDetailActivity;
 import com.xsf.framework.util.LogUtils;
 import com.xsf.framework.util.RecyclerViewUtil;
 

@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.main.homepage;
+package com.xsf.realstuff.launcher.ui.module.main.homepage;
 
 
 import android.content.Intent;
@@ -25,9 +25,9 @@ import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.realstuff.launcher.presenter.IHomePagePresenter;
 import com.xsf.realstuff.launcher.presenter.Impl.HomePagePresenterImpl;
 import com.xsf.realstuff.launcher.ui.adapter.HomePageAdapter;
-import com.xsf.realstuff.launcher.ui.moudle.detail.DetailActivity;
-import com.xsf.realstuff.launcher.ui.moudle.main.homepage.view.IHomePageView;
-import com.xsf.realstuff.launcher.ui.moudle.picdetail.PicDetailActivity;
+import com.xsf.realstuff.launcher.ui.module.detail.DetailActivity;
+import com.xsf.realstuff.launcher.ui.module.main.homepage.view.IHomePageView;
+import com.xsf.realstuff.launcher.ui.module.picdetail.PicDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;

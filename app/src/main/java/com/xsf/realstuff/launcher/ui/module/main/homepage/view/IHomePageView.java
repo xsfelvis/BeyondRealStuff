@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.main.homepage.view;
+package com.xsf.realstuff.launcher.ui.module.main.homepage.view;
 
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.framework.base.presenter.MvpView;

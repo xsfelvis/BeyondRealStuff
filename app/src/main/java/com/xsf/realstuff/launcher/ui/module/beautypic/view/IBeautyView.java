@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.beautypic.view;
+package com.xsf.realstuff.launcher.ui.module.beautypic.view;
 
 import com.xsf.realstuff.launcher.data.network.response.Result;
 import com.xsf.framework.base.presenter.MvpView;

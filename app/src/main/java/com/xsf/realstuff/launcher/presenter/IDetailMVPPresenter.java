@@ -2,7 +2,7 @@ package com.xsf.realstuff.launcher.presenter;
 
 import com.xsf.framework.base.presenter.MvpPresenter;
 import com.xsf.realstuff.launcher.data.network.response.Result;
-import com.xsf.realstuff.launcher.ui.moudle.detail.view.IDetailView;
+import com.xsf.realstuff.launcher.ui.module.detail.view.IDetailView;
 
 /**
  * Created by Administrator on 2017/4/14 0014.

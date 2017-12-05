@@ -6,7 +6,7 @@ import com.xsf.realstuff.launcher.common.BasePresenter;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.realstuff.launcher.data.model.Order;
 import com.xsf.realstuff.launcher.presenter.IOrderMvpPresenter;
-import com.xsf.realstuff.launcher.ui.moudle.main.order.view.IOrderView;
+import com.xsf.realstuff.launcher.ui.module.main.order.view.IOrderView;
 
 import java.util.List;
 

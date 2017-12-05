@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.main.theme.view;
+package com.xsf.realstuff.launcher.ui.module.main.theme.view;
 
 
 import com.xsf.framework.base.presenter.MvpView;

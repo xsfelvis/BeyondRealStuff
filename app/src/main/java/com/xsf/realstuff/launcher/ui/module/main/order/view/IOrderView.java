@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.main.order.view;
+package com.xsf.realstuff.launcher.ui.module.main.order.view;
 
 import com.xsf.framework.base.presenter.MvpView;
 import com.xsf.realstuff.launcher.data.model.Order;

@@ -1,4 +1,4 @@
-package com.xsf.realstuff.launcher.ui.moudle.setting;
+package com.xsf.realstuff.launcher.ui.module.setting;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
