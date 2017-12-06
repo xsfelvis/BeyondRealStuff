@@ -27,4 +27,5 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["butterknife-complier"]
 
     compile project(':framework')
+    compile project(':studytest')
 }

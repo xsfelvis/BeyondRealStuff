@@ -1,4 +1,4 @@
-package com.xsf.studytest;
+package test;
 
 import android.text.TextUtils;
 

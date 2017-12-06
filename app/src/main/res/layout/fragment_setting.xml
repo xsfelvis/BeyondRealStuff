@@ -23,8 +23,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="16dp"
-            android:src="@mipmap/clean_cache"
-            />
+            android:src="@mipmap/clean_cache"/>
 
         <TextView
             android:id="@+id/tv_clean"
@@ -174,6 +173,40 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="关于App"
+            android:textColor="@color/settingtextcolor"
+            android:textSize="14sp"
+            />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line5"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="50dp"
+        android:background="?attr/bottomline"/>
+
+    <LinearLayout
+        android:id="@+id/ll_about_test"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="16dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            />
+
+        <TextView
+            android:id="@+id/tv_about_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="测试入口"
             android:textColor="@color/settingtextcolor"
             android:textSize="14sp"
             />

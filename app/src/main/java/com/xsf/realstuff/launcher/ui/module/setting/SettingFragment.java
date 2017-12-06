@@ -18,6 +18,7 @@ import com.xsf.realstuff.launcher.RealStuffApplication;
 import com.xsf.realstuff.launcher.common.AbstractLazyFragment;
 import com.xsf.realstuff.launcher.data.IDataManger;
 import com.xsf.framework.util.DataCleanManager;
+import com.xsf.studytest.TestMainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +39,8 @@ public class SettingFragment extends AbstractLazyFragment {
     LinearLayout mLlClean;
     @BindView(R.id.tv_about_app)
     TextView mTvAboutApp;
+    @BindView(R.id.tv_about_test)
+    TextView mTvTest;
     private Unbinder mUnbinder;
 
 
@@ -86,6 +89,13 @@ public class SettingFragment extends AbstractLazyFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        mTvTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestMainActivity.jumpToTestMainActivity(TestMainActivity.class, getActivity());
+            }
+        });
 
 
     }
