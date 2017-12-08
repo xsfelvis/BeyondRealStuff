@@ -6,6 +6,9 @@
 - 网络库封装 (done)
 - 图片库封装 (done)
 - gradle 统一依赖管理(done)
+- 增加学习测试的入口
+- spi学习
+- 动态代理学习
 
 ## todo list
 - 抽出 frame、card、presenter等框架主干模型
