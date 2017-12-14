@@ -5,6 +5,8 @@
     <application>
         <activity android:name=".TestMainActivity">
         </activity>
+        <activity android:name=".zhuhiadv.ZhihuAdvActivity">
+        </activity>
     </application>
 
 </manifest>

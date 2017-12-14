@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.xsf.studytest.spi.IAnimal;
+import com.xsf.studytest.util.JumpUtil;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
@@ -15,6 +16,7 @@ import java.util.ServiceLoader;
 
 public class TestMainActivity extends AppCompatActivity implements View.OnClickListener {
     Button mBtnSpi;
+    Button mBtnZhihu;
 
 
     public static void jumpToTestMainActivity(Class claz, Context context) {
@@ -33,6 +35,8 @@ public class TestMainActivity extends AppCompatActivity implements View.OnClickL
     private void init() {
         mBtnSpi = findViewById(R.id.btnSpi);
         mBtnSpi.setOnClickListener(this);
+        mBtnZhihu = findViewById(R.id.btnZhihuAdv);
+        mBtnZhihu.setOnClickListener(this);
     }
 
     @Override
@@ -40,6 +44,8 @@ public class TestMainActivity extends AppCompatActivity implements View.OnClickL
         int id = v.getId();
         if (id == R.id.btnSpi) {
             testSpi();
+        } else if (id == R.id.btnZhihuAdv) {
+            JumpUtil.gotoZhihuAdv(TestMainActivity.this);
         }
     }
 

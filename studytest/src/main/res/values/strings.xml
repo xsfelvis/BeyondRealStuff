@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StudyTest</string>
+    <string name="spi">spi</string>
+    <string name="zhihuAdv">知乎创意广告</string>
 </resources>
